@@ -1,0 +1,41 @@
+#######################################
+# Syntax Coloring Map For Test
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+shiftDevice	KEYWORD1
+shiftStepMotor	KEYWORD1
+shiftBoard	KEYWORD1
+shiftSixteen	KEYWORD1
+shiftChain	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+doDevTick	KEYWORD2
+getChannels	KEYWORD2
+incrStep	KEYWORD2
+doSteps	KEYWORD2
+setSpeed	KEYWORD2
+getSpeed	KEYWORD2
+getStepsToGo	KEYWORD2
+doBoardTick	KEYWORD2
+getDevCount	KEYWORD2
+getDev	KEYWORD2
+getBoardSize	KEYWORD2
+startTimer	KEYWORD2
+stopTimer	KEYWORD2
+doTick	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+__channelsPerMotor__	LITERAL1
+__maxMotorSpeed__	LITERAL1

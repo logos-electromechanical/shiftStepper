@@ -1,0 +1,178 @@
+\hypertarget{classshift_board}{
+\section{shiftBoard Class Reference}
+\label{classshift_board}\index{shiftBoard@{shiftBoard}}
+}
+
+
+Abstract base class for individual boards.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+Inheritance diagram for shiftBoard:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classshift_board}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{doBoardTick} (uint8\_\-t chainSize, uint8\_\-t firstByte, uint8\_\-t $\ast$chainBytes)
+\begin{DoxyCompactList}\small\item\em Handle for per timer tick behavior of each board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_a7cf15ad074c5807b999bfcf490e2238a}{getDevCount} (void)
+\begin{DoxyCompactList}\small\item\em Get the number of objects associated with the board. \item\end{DoxyCompactList}\item 
+\hyperlink{classshift_device}{shiftDevice} $\ast$ \hyperlink{classshift_board_a0e47ab5a1c49478144a24342f34582d7}{getDev} (uint8\_\-t index)
+\begin{DoxyCompactList}\small\item\em Get pointer to device at index. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_ab60640025bb7557c57561a60bc97fc03}{getBoardSize} (void)
+\begin{DoxyCompactList}\small\item\em Get the size of the board's datastream, in bytes. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\_\-t \hyperlink{classshift_board_a814955fb002a8aa0218052c7adc130ea}{byteCount}
+\begin{DoxyCompactList}\small\item\em Number of bytes of shift register on the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_abdbf7eaef6353a2ffddbf69753a82ef2}{firstChan}
+\begin{DoxyCompactList}\small\item\em First active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_a61a3f53b408a4165d38b613efd2b4d5e}{lastChan}
+\begin{DoxyCompactList}\small\item\em Last active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
+\hyperlink{classshift_device}{shiftDevice} $\ast$$\ast$ \hyperlink{classshift_board_a07a2549714f7064fa5e48ec63fdb5efb}{devices}
+\begin{DoxyCompactList}\small\item\em An array of pointers to all of the objects associated with this board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_ae7bba07850ced1219dcf67cab33de929}{devCount}
+\begin{DoxyCompactList}\small\item\em Number of entries in the device array. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for individual boards. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{
+\index{shiftBoard@{shiftBoard}!doBoardTick@{doBoardTick}}
+\index{doBoardTick@{doBoardTick}!shiftBoard@{shiftBoard}}
+\subsubsection[{doBoardTick}]{\setlength{\rightskip}{0pt plus 5cm}virtual void shiftBoard::doBoardTick (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ chainSize, }
+\item[{uint8\_\-t}]{ firstByte, }
+\item[{uint8\_\-t $\ast$}]{ chainBytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}
+
+
+Handle for per timer tick behavior of each board. 
+
+
+
+Reimplemented in \hyperlink{classshift_sixteen_a28c2a73078d10abf6f779021fd8d2908}{shiftSixteen}.
+
+\hypertarget{classshift_board_ab60640025bb7557c57561a60bc97fc03}{
+\index{shiftBoard@{shiftBoard}!getBoardSize@{getBoardSize}}
+\index{getBoardSize@{getBoardSize}!shiftBoard@{shiftBoard}}
+\subsubsection[{getBoardSize}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoard::getBoardSize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_board_ab60640025bb7557c57561a60bc97fc03}
+
+
+Get the size of the board's datastream, in bytes. 
+
+\begin{DoxyReturn}{Returns}
+The number of bytes of shift register on this board 
+\end{DoxyReturn}
+\hypertarget{classshift_board_a0e47ab5a1c49478144a24342f34582d7}{
+\index{shiftBoard@{shiftBoard}!getDev@{getDev}}
+\index{getDev@{getDev}!shiftBoard@{shiftBoard}}
+\subsubsection[{getDev}]{\setlength{\rightskip}{0pt plus 5cm}{\bf shiftDevice} $\ast$ shiftBoard::getDev (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ index}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_board_a0e47ab5a1c49478144a24342f34582d7}
+
+
+Get pointer to device at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the desired device, relative to the board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the device at index 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+class \hyperlink{classshift_device}{shiftDevice} 
+\end{DoxySeeAlso}
+\hypertarget{classshift_board_a7cf15ad074c5807b999bfcf490e2238a}{
+\index{shiftBoard@{shiftBoard}!getDevCount@{getDevCount}}
+\index{getDevCount@{getDevCount}!shiftBoard@{shiftBoard}}
+\subsubsection[{getDevCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoard::getDevCount (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_board_a7cf15ad074c5807b999bfcf490e2238a}
+
+
+Get the number of objects associated with the board. 
+
+\begin{DoxyReturn}{Returns}
+The number of devices associated with this board 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classshift_board_a814955fb002a8aa0218052c7adc130ea}{
+\index{shiftBoard@{shiftBoard}!byteCount@{byteCount}}
+\index{byteCount@{byteCount}!shiftBoard@{shiftBoard}}
+\subsubsection[{byteCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoard::byteCount}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_a814955fb002a8aa0218052c7adc130ea}
+
+
+Number of bytes of shift register on the board. 
+
+\hypertarget{classshift_board_ae7bba07850ced1219dcf67cab33de929}{
+\index{shiftBoard@{shiftBoard}!devCount@{devCount}}
+\index{devCount@{devCount}!shiftBoard@{shiftBoard}}
+\subsubsection[{devCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoard::devCount}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_ae7bba07850ced1219dcf67cab33de929}
+
+
+Number of entries in the device array. 
+
+\hypertarget{classshift_board_a07a2549714f7064fa5e48ec63fdb5efb}{
+\index{shiftBoard@{shiftBoard}!devices@{devices}}
+\index{devices@{devices}!shiftBoard@{shiftBoard}}
+\subsubsection[{devices}]{\setlength{\rightskip}{0pt plus 5cm}{\bf shiftDevice}$\ast$$\ast$ {\bf shiftBoard::devices}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_a07a2549714f7064fa5e48ec63fdb5efb}
+
+
+An array of pointers to all of the objects associated with this board. 
+
+\hypertarget{classshift_board_abdbf7eaef6353a2ffddbf69753a82ef2}{
+\index{shiftBoard@{shiftBoard}!firstChan@{firstChan}}
+\index{firstChan@{firstChan}!shiftBoard@{shiftBoard}}
+\subsubsection[{firstChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoard::firstChan}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_abdbf7eaef6353a2ffddbf69753a82ef2}
+
+
+First active channel/byte/bit on the board. 
+
+\hypertarget{classshift_board_a61a3f53b408a4165d38b613efd2b4d5e}{
+\index{shiftBoard@{shiftBoard}!lastChan@{lastChan}}
+\index{lastChan@{lastChan}!shiftBoard@{shiftBoard}}
+\subsubsection[{lastChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoard::lastChan}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_a61a3f53b408a4165d38b613efd2b4d5e}
+
+
+Last active channel/byte/bit on the board. 
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

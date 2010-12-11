@@ -1,0 +1,6 @@
+In order to install this library, copy this directory into the arduino library directory:
+
+~/libraries
+
+Then restart the Arduino IDE and it should appear in the Tools/Import Library pulldown and
+in the File/Examples pulldown.

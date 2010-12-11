@@ -1,0 +1,240 @@
+\hypertarget{classshift_step_motor}{
+\section{shiftStepMotor Class Reference}
+\label{classshift_step_motor}\index{shiftStepMotor@{shiftStepMotor}}
+}
+
+
+Implementation of a 4-\/phase unipolar stepper motor device.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+Inheritance diagram for shiftStepMotor:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classshift_step_motor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classshift_step_motor_aee8974e1496495ce45c7b43d0b42c464}{shiftStepMotor} (const uint8\_\-t seqSteps, const uint8\_\-t $\ast$sequence, const uint8\_\-t $\ast$channels)
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{classshift_step_motor}{shiftStepMotor} object. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_step_motor_a463d9926c5bb4db38cea1a5d56c2c391}{incrStep} (int8\_\-t dir)
+\begin{DoxyCompactList}\small\item\em Go one step in the commanded direction. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_step_motor_aa93008b0f0485302d0512b85e9680df1}{doSteps} (int16\_\-t steps, int16\_\-t speed)
+\begin{DoxyCompactList}\small\item\em Command a move of steps steps at speed speed. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}{setSpeed} (int16\_\-t speed)
+\begin{DoxyCompactList}\small\item\em Set motor speed and direction. \item\end{DoxyCompactList}\item 
+int16\_\-t \hyperlink{classshift_step_motor_a04f4a1dd0f970ea4937a3171ca965604}{getSpeed} (void)
+\begin{DoxyCompactList}\small\item\em Get the current speed. \item\end{DoxyCompactList}\item 
+int16\_\-t \hyperlink{classshift_step_motor_a1dcfe79646ef64dc6e97ff5488e68548}{getStepsToGo} (void)
+\begin{DoxyCompactList}\small\item\em Get the number of steps to go in the current move. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_step_motor_ae5f84d01eb0fd8226325aeb52ca401fb}{getSeqStep} (void)
+\begin{DoxyCompactList}\small\item\em Returns the current output switch configuration. \item\end{DoxyCompactList}\item 
+void \hyperlink{classshift_step_motor_a9555644f6653ecaaf66611d26dd07959}{doDevTick} (uint8\_\-t bytesPerBoard, uint8\_\-t $\ast$boardBytes)
+\begin{DoxyCompactList}\small\item\em Local implementation of per timer tick behavior. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of a 4-\/phase unipolar stepper motor device. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classshift_step_motor_aee8974e1496495ce45c7b43d0b42c464}{
+\index{shiftStepMotor@{shiftStepMotor}!shiftStepMotor@{shiftStepMotor}}
+\index{shiftStepMotor@{shiftStepMotor}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{shiftStepMotor}]{\setlength{\rightskip}{0pt plus 5cm}shiftStepMotor::shiftStepMotor (
+\begin{DoxyParamCaption}
+\item[{const uint8\_\-t}]{ seqSteps, }
+\item[{const uint8\_\-t $\ast$}]{ sequence, }
+\item[{const uint8\_\-t $\ast$}]{ channels}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_aee8974e1496495ce45c7b43d0b42c464}
+
+
+Creates a \hyperlink{classshift_step_motor}{shiftStepMotor} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seqSteps} & The number of steps in the sequence of switch positions required to turn the motor. Typically 4 (full steps) or 8 (half steps). \\
+\hline
+{\em $\ast$sequence} & The array of switch positions for each step in the sequence. Bit 0 of each element of this array controls channels\mbox{[}0\mbox{]}, bit 1 controls channels\mbox{[}1\mbox{]}, etc. This array must have a number of elements equal to seqSteps. This array must be allocated either statically or at global scope. \\
+\hline
+{\em $\ast$channels} & The array of channel numbers used by the motor. Must have four elements. The order of the channels in this array determines how the members of sequence\mbox{[}\mbox{]} are interpreted. This array must be allocated either statically or at global scope. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_step_motor_a9555644f6653ecaaf66611d26dd07959}{
+\index{shiftStepMotor@{shiftStepMotor}!doDevTick@{doDevTick}}
+\index{doDevTick@{doDevTick}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{doDevTick}]{\setlength{\rightskip}{0pt plus 5cm}void shiftStepMotor::doDevTick (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ bytesPerBoard, }
+\item[{uint8\_\-t $\ast$}]{ boardBytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classshift_step_motor_a9555644f6653ecaaf66611d26dd07959}
+
+
+Local implementation of per timer tick behavior. 
+
+This function manages the per-\/tick behavior of a stepper motor device. It performs the following tasks:
+\begin{DoxyItemize}
+\item Checks whether or not it's time to make a step, based on the values of stepSpeed, lastStep, and stepsToGo
+\item Writes the current switch state to the bits corresponding to the output channels in the boardBytes\mbox{[}\mbox{]} array 
+\end{DoxyItemize}
+
+Reimplemented from \hyperlink{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{shiftDevice}.
+
+\hypertarget{classshift_step_motor_aa93008b0f0485302d0512b85e9680df1}{
+\index{shiftStepMotor@{shiftStepMotor}!doSteps@{doSteps}}
+\index{doSteps@{doSteps}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{doSteps}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftStepMotor::doSteps (
+\begin{DoxyParamCaption}
+\item[{int16\_\-t}]{ steps, }
+\item[{int16\_\-t}]{ speed}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_aa93008b0f0485302d0512b85e9680df1}
+
+
+Command a move of steps steps at speed speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em steps} & The number of steps to move. If this number is negative, then this function commands continuous rotation. \\
+\hline
+{\em speed} & The speed at which to make the move. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the error status. This feature has not been implemented, so it always returns 0 (success) 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}{shiftStepMotor::setSpeed()} for details on how the speed parameter works. 
+\end{DoxySeeAlso}
+\hypertarget{classshift_step_motor_ae5f84d01eb0fd8226325aeb52ca401fb}{
+\index{shiftStepMotor@{shiftStepMotor}!getSeqStep@{getSeqStep}}
+\index{getSeqStep@{getSeqStep}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{getSeqStep}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftStepMotor::getSeqStep (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_ae5f84d01eb0fd8226325aeb52ca401fb}
+
+
+Returns the current output switch configuration. 
+
+\begin{DoxyReturn}{Returns}
+a byte describing the state of the four switches that drive the stepper motor. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classshift_step_motor_aee8974e1496495ce45c7b43d0b42c464}{shiftStepMotor::shiftStepMotor()} 
+\end{DoxySeeAlso}
+\hypertarget{classshift_step_motor_a04f4a1dd0f970ea4937a3171ca965604}{
+\index{shiftStepMotor@{shiftStepMotor}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{getSpeed}]{\setlength{\rightskip}{0pt plus 5cm}int16\_\-t shiftStepMotor::getSpeed (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_a04f4a1dd0f970ea4937a3171ca965604}
+
+
+Get the current speed. 
+
+\begin{DoxyReturn}{Returns}
+Speed value is in the same form as the input to \hyperlink{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}{shiftStepMotor::setSpeed()}. It derives this from the internal representation by inverting the process described for that function. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}{shiftStepMotor::setSpeed()} 
+\end{DoxySeeAlso}
+\hypertarget{classshift_step_motor_a1dcfe79646ef64dc6e97ff5488e68548}{
+\index{shiftStepMotor@{shiftStepMotor}!getStepsToGo@{getStepsToGo}}
+\index{getStepsToGo@{getStepsToGo}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{getStepsToGo}]{\setlength{\rightskip}{0pt plus 5cm}int16\_\-t shiftStepMotor::getStepsToGo (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_a1dcfe79646ef64dc6e97ff5488e68548}
+
+
+Get the number of steps to go in the current move. 
+
+\begin{DoxyReturn}{Returns}
+The number of steps yet to go. A negative value commands continuous rotation. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classshift_step_motor_aa93008b0f0485302d0512b85e9680df1}{shiftStepMotor::doSteps()}; 
+\end{DoxySeeAlso}
+\hypertarget{classshift_step_motor_a463d9926c5bb4db38cea1a5d56c2c391}{
+\index{shiftStepMotor@{shiftStepMotor}!incrStep@{incrStep}}
+\index{incrStep@{incrStep}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{incrStep}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftStepMotor::incrStep (
+\begin{DoxyParamCaption}
+\item[{int8\_\-t}]{ dir}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_a463d9926c5bb4db38cea1a5d56c2c391}
+
+
+Go one step in the commanded direction. 
+
+This function does one of three things, depending on the current state of the motor:
+\begin{DoxyItemize}
+\item If the motor is turning continuously (i.e. stepsToGo $<$ 0), it does nothing
+\item If the motor is stopped (stepsToGo = 0), it does one step in the commanded direction
+\item If the motor is in the middle of a commanded move, one step is added to the move in the commanded direction. If the move is positive and dir is positive, then one step will be added to the current move. If the move is positive and the dir is negative, one step will be subtracted for the current move.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & This defines the direction in which to perform the step. If dir $>$ 0, the step is positive; if dir $<$= 0, the step is negative. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the error status. This feature has not been implemented, so it always returns 0 (success) 
+\end{DoxyReturn}
+\hypertarget{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}{
+\index{shiftStepMotor@{shiftStepMotor}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!shiftStepMotor@{shiftStepMotor}}
+\subsubsection[{setSpeed}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftStepMotor::setSpeed (
+\begin{DoxyParamCaption}
+\item[{int16\_\-t}]{ speed}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_step_motor_adc24feb4fba5e88460623f95f7c377e2}
+
+
+Set motor speed and direction. 
+
+The most convenient way to represent the speed internally is as the number of \hyperlink{classshift_step_motor_a9555644f6653ecaaf66611d26dd07959}{doDevTick()} calls between steps. However, this is unwieldy to use, so this function simplifies it. \_\-\_\-maxMotorSpeed\_\-\_\- defines the maximum speed, and also the number of ticks that can be skipped per step. In order to determine the number of steps to skip, this function executes the following steps:
+\begin{DoxyEnumerate}
+\item Limit the speed parameter to between -\/\_\-\_\-maxMotorSpeed\_\-\_\- and \_\-\_\-maxMotorSpeed\_\-\_\-
+\item If speed $>$ 0 (i.e. positive sense), set stepSpeed to \_\-\_\-maxMotorSpeed\_\-\_\- -\/ speed + 1
+\item If speed $<$ 0 (i.e. negative sense), set stepSpeed to -\/\_\-\_\-maxMotorSpeed\_\-\_\- -\/ speed -\/ 1
+\item If speed = 0 set stepSpeed to 0, i.e. no rotation
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & The desired motor speed; sign indicates direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the error status. This feature has not been implemented, so it always returns 0 (success) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,80 @@
+\hypertarget{classshift_six}{
+\section{shiftSix Class Reference}
+\label{classshift_six}\index{shiftSix@{shiftSix}}
+}
+
+
+Implementation of shiftBoard for a six channel high current Arduino shield.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classshift_six_a061ead17cbd393a561fa54146358c627}{shiftSix} (uint8\_\-t \hyperlink{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}{devCount}, \hyperlink{classshift_device}{shiftDevice} $\ast$$\ast$\hyperlink{_shift_stepper_8h_ae69cffa41bbed7173c4796af281252ce}{devices})
+\begin{DoxyCompactList}\small\item\em Create a ShiftSix object. \item\end{DoxyCompactList}\item 
+void \hyperlink{classshift_six_aa69539cff7e19873a7d37e640632e966}{doBoardTick} (uint8\_\-t chainSize, uint8\_\-t firstByte, uint8\_\-t $\ast$chainBytes)
+\begin{DoxyCompactList}\small\item\em Do a timer tick for a sixteen channel board. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of shiftBoard for a six channel high current Arduino shield. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classshift_six_a061ead17cbd393a561fa54146358c627}{
+\index{shiftSix@{shiftSix}!shiftSix@{shiftSix}}
+\index{shiftSix@{shiftSix}!shiftSix@{shiftSix}}
+\subsubsection[{shiftSix}]{\setlength{\rightskip}{0pt plus 5cm}shiftSix::shiftSix (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ devCount, }
+\item[{{\bf shiftDevice} $\ast$$\ast$}]{ devices}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_six_a061ead17cbd393a561fa54146358c627}
+
+
+Create a ShiftSix object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em devCount} & Number of devices \\
+\hline
+{\em devices} & Array of pointers to device objects \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_six_aa69539cff7e19873a7d37e640632e966}{
+\index{shiftSix@{shiftSix}!doBoardTick@{doBoardTick}}
+\index{doBoardTick@{doBoardTick}!shiftSix@{shiftSix}}
+\subsubsection[{doBoardTick}]{\setlength{\rightskip}{0pt plus 5cm}void shiftSix::doBoardTick (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ chainSize, }
+\item[{uint8\_\-t}]{ firstByte, }
+\item[{uint8\_\-t $\ast$}]{ chainBytes}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_six_aa69539cff7e19873a7d37e640632e966}
+
+
+Do a timer tick for a sixteen channel board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chainSize} & Total number of bytes in the chain \\
+\hline
+{\em firstByte} & First byte in chainBytes that this function writes to \\
+\hline
+{\em chainBytes} & Array of bytes to be shifted out \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

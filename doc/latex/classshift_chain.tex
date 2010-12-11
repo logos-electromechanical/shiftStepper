@@ -1,0 +1,190 @@
+\hypertarget{classshift_chain}{
+\section{shiftChain Class Reference}
+\label{classshift_chain}\index{shiftChain@{shiftChain}}
+}
+
+
+Class to represent a daisy chain of boards.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classshift_chain_a195e5184202ba7408c5d4e5c9a568942}{shiftChain} (uint8\_\-t boardCount, shiftBoard $\ast$$\ast$boards, uint8\_\-t dataPin, uint8\_\-t clockPin, uint8\_\-t latchPin, uint8\_\-t resetPin)
+\begin{DoxyCompactList}\small\item\em Create a new daisy chain object, without an index output. \item\end{DoxyCompactList}\item 
+\hyperlink{classshift_chain_a18e8f5846d6fcece74e38051ce953467}{shiftChain} (uint8\_\-t boardCount, shiftBoard $\ast$$\ast$boards, uint8\_\-t dataPin, uint8\_\-t clockPin, uint8\_\-t latchPin, uint8\_\-t resetPin, uint8\_\-t indexPin)
+\begin{DoxyCompactList}\small\item\em Create a new daisy chain object, with an index output. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_chain_a580a9110d442bcf5c251ad2618b7943d}{getBoardCount} (void)
+\begin{DoxyCompactList}\small\item\em Get the number of boards in the chain. \item\end{DoxyCompactList}\item 
+shiftBoard $\ast$ \hyperlink{classshift_chain_a625ee1a0a7dcf77c5895391a58667267}{getBoard} (uint8\_\-t index)
+\begin{DoxyCompactList}\small\item\em Get a pointer to a particular board in the chain. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_chain_a563be48435fee78934e72ef67be030e1}{startTimer} (uint8\_\-t prescaler, uint8\_\-t timerVal, uint8\_\-t timer)
+\begin{DoxyCompactList}\small\item\em Start the timer. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_chain_a3ffc2c0718b6be07c369bee0dc756217}{stopTimer} (void)
+\begin{DoxyCompactList}\small\item\em Shut down the current timer. \item\end{DoxyCompactList}\item 
+void \hyperlink{classshift_chain_ad6727d72887b7017f68ef6dc7948a7ed}{doTick} (void)
+\begin{DoxyCompactList}\small\item\em Do a timer tick -\/-\/ call this from an ISR. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to represent a daisy chain of boards. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classshift_chain_a195e5184202ba7408c5d4e5c9a568942}{
+\index{shiftChain@{shiftChain}!shiftChain@{shiftChain}}
+\index{shiftChain@{shiftChain}!shiftChain@{shiftChain}}
+\subsubsection[{shiftChain}]{\setlength{\rightskip}{0pt plus 5cm}shiftChain::shiftChain (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ boardCount, }
+\item[{shiftBoard $\ast$$\ast$}]{ boards, }
+\item[{uint8\_\-t}]{ dataPin, }
+\item[{uint8\_\-t}]{ clockPin, }
+\item[{uint8\_\-t}]{ latchPin, }
+\item[{uint8\_\-t}]{ resetPin}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a195e5184202ba7408c5d4e5c9a568942}
+
+
+Create a new daisy chain object, without an index output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em boardCount} & The number of boards in the chain \\
+\hline
+{\em boards} & Array of pointers to ShiftBoard objects \\
+\hline
+{\em dataPin} & Arduino pin number to be used for the data line \\
+\hline
+{\em clockPin} & Arduino pin number to be used for the clock line \\
+\hline
+{\em latchPin} & Arduino pin number to be used for the latch line \\
+\hline
+{\em resetPin} & Arduino pin number to be used for the master reset line \\
+\hline
+\end{DoxyParams}
+\hypertarget{classshift_chain_a18e8f5846d6fcece74e38051ce953467}{
+\index{shiftChain@{shiftChain}!shiftChain@{shiftChain}}
+\index{shiftChain@{shiftChain}!shiftChain@{shiftChain}}
+\subsubsection[{shiftChain}]{\setlength{\rightskip}{0pt plus 5cm}shiftChain::shiftChain (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ boardCount, }
+\item[{shiftBoard $\ast$$\ast$}]{ boards, }
+\item[{uint8\_\-t}]{ dataPin, }
+\item[{uint8\_\-t}]{ clockPin, }
+\item[{uint8\_\-t}]{ latchPin, }
+\item[{uint8\_\-t}]{ resetPin, }
+\item[{uint8\_\-t}]{ indexPin}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a18e8f5846d6fcece74e38051ce953467}
+
+
+Create a new daisy chain object, with an index output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em boardCount} & The number of boards in the chain \\
+\hline
+{\em boards} & Array of pointers to ShiftBoard objects \\
+\hline
+{\em dataPin} & Arduino pin number to be used for the data line \\
+\hline
+{\em clockPin} & Arduino pin number to be used for the clock line \\
+\hline
+{\em latchPin} & Arduino pin number to be used for the latch line \\
+\hline
+{\em resetPin} & Arduino pin number to be used for the master reset line \\
+\hline
+{\em indexPin} & Arduino pin number to be used for an index output \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_chain_ad6727d72887b7017f68ef6dc7948a7ed}{
+\index{shiftChain@{shiftChain}!doTick@{doTick}}
+\index{doTick@{doTick}!shiftChain@{shiftChain}}
+\subsubsection[{doTick}]{\setlength{\rightskip}{0pt plus 5cm}void shiftChain::doTick (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_ad6727d72887b7017f68ef6dc7948a7ed}
+
+
+Do a timer tick -\/-\/ call this from an ISR. 
+
+\hypertarget{classshift_chain_a625ee1a0a7dcf77c5895391a58667267}{
+\index{shiftChain@{shiftChain}!getBoard@{getBoard}}
+\index{getBoard@{getBoard}!shiftChain@{shiftChain}}
+\subsubsection[{getBoard}]{\setlength{\rightskip}{0pt plus 5cm}shiftBoard $\ast$ shiftChain::getBoard (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ index}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a625ee1a0a7dcf77c5895391a58667267}
+
+
+Get a pointer to a particular board in the chain. 
+
+\hypertarget{classshift_chain_a580a9110d442bcf5c251ad2618b7943d}{
+\index{shiftChain@{shiftChain}!getBoardCount@{getBoardCount}}
+\index{getBoardCount@{getBoardCount}!shiftChain@{shiftChain}}
+\subsubsection[{getBoardCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftChain::getBoardCount (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a580a9110d442bcf5c251ad2618b7943d}
+
+
+Get the number of boards in the chain. 
+
+\hypertarget{classshift_chain_a563be48435fee78934e72ef67be030e1}{
+\index{shiftChain@{shiftChain}!startTimer@{startTimer}}
+\index{startTimer@{startTimer}!shiftChain@{shiftChain}}
+\subsubsection[{startTimer}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftChain::startTimer (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ prescaler, }
+\item[{uint8\_\-t}]{ timerVal, }
+\item[{uint8\_\-t}]{ timer}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a563be48435fee78934e72ef67be030e1}
+
+
+Start the timer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prescaler} & Select the timer pre-\/scaler. Defaults to 1024 \\
+\hline
+{\em timerVal} & Select a value for the timer to reset to, for precise control of frequency \\
+\hline
+{\em timer} & Select the timer to use; only Timer 2 works currently \\
+\hline
+\end{DoxyParams}
+\hypertarget{classshift_chain_a3ffc2c0718b6be07c369bee0dc756217}{
+\index{shiftChain@{shiftChain}!stopTimer@{stopTimer}}
+\index{stopTimer@{stopTimer}!shiftChain@{shiftChain}}
+\subsubsection[{stopTimer}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftChain::stopTimer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_chain_a3ffc2c0718b6be07c369bee0dc756217}
+
+
+Shut down the current timer. 
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

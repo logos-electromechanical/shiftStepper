@@ -1,0 +1,119 @@
+\hypertarget{classshift_device}{
+\section{shiftDevice Class Reference}
+\label{classshift_device}\index{shiftDevice@{shiftDevice}}
+}
+
+
+Abstract base class for creating devices such as motors that attach to a board.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+Inheritance diagram for shiftDevice:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classshift_device}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{doDevTick} (uint8\_\-t bytesPerBoard, uint8\_\-t $\ast$boardBytes)
+\begin{DoxyCompactList}\small\item\em Handle for the per timer tick behavior of each device. \item\end{DoxyCompactList}\item 
+uint8\_\-t $\ast$ \hyperlink{classshift_device_a56b744e801a501975b323f4d3336b6f1}{getChannels} (void)
+\begin{DoxyCompactList}\small\item\em Get the byte array that holds the channels that the device occupies. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_device_a38f7799b9f1ae1269bba5da52fd84b4b}{getChanCount} (void)
+\begin{DoxyCompactList}\small\item\em Get the number of channels the device occupies. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\_\-t $\ast$ \hyperlink{classshift_device_ac63a0543346c357134fd207a47976bab}{channels}
+\begin{DoxyCompactList}\small\item\em Array of channels in the object relative to the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_device_a8eed8391ef608036d0f55f42348c0e41}{chanCount}
+\begin{DoxyCompactList}\small\item\em Number of channels per device, in device units. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for creating devices such as motors that attach to a board. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{
+\index{shiftDevice@{shiftDevice}!doDevTick@{doDevTick}}
+\index{doDevTick@{doDevTick}!shiftDevice@{shiftDevice}}
+\subsubsection[{doDevTick}]{\setlength{\rightskip}{0pt plus 5cm}virtual void shiftDevice::doDevTick (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ bytesPerBoard, }
+\item[{uint8\_\-t $\ast$}]{ boardBytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}
+
+
+Handle for the per timer tick behavior of each device. 
+
+This function is intended to be called from shiftBoard::doBoardTick(), which passes it the array of bytes that it expects it to write the data to be shifted out to. 
+\begin{DoxyParams}{Parameters}
+{\em bytesPerBoard} & is the number of outgoing bytes for the board this device is part of. \\
+\hline
+{\em $\ast$boardBytes} & is the array of outgoing bytes for the board this device is part of.\\
+\hline
+\end{DoxyParams}
+Must be re-\/implemented by each sub-\/class. 
+
+Reimplemented in \hyperlink{classshift_step_motor_a9555644f6653ecaaf66611d26dd07959}{shiftStepMotor}, and \hyperlink{classshift_switch_block_ab6bbc5883fc7d966103df29d40ae012e}{shiftSwitchBlock}.
+
+\hypertarget{classshift_device_a38f7799b9f1ae1269bba5da52fd84b4b}{
+\index{shiftDevice@{shiftDevice}!getChanCount@{getChanCount}}
+\index{getChanCount@{getChanCount}!shiftDevice@{shiftDevice}}
+\subsubsection[{getChanCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftDevice::getChanCount (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_device_a38f7799b9f1ae1269bba5da52fd84b4b}
+
+
+Get the number of channels the device occupies. 
+
+\hypertarget{classshift_device_a56b744e801a501975b323f4d3336b6f1}{
+\index{shiftDevice@{shiftDevice}!getChannels@{getChannels}}
+\index{getChannels@{getChannels}!shiftDevice@{shiftDevice}}
+\subsubsection[{getChannels}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t $\ast$ shiftDevice::getChannels (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_device_a56b744e801a501975b323f4d3336b6f1}
+
+
+Get the byte array that holds the channels that the device occupies. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classshift_device_a8eed8391ef608036d0f55f42348c0e41}{
+\index{shiftDevice@{shiftDevice}!chanCount@{chanCount}}
+\index{chanCount@{chanCount}!shiftDevice@{shiftDevice}}
+\subsubsection[{chanCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftDevice::chanCount}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_device_a8eed8391ef608036d0f55f42348c0e41}
+
+
+Number of channels per device, in device units. 
+
+For example, a unipolar step motor consumes four switch channels. \hypertarget{classshift_device_ac63a0543346c357134fd207a47976bab}{
+\index{shiftDevice@{shiftDevice}!channels@{channels}}
+\index{channels@{channels}!shiftDevice@{shiftDevice}}
+\subsubsection[{channels}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t$\ast$ {\bf shiftDevice::channels}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_device_ac63a0543346c357134fd207a47976bab}
+
+
+Array of channels in the object relative to the board. 
+
+This array holds the channel numbers. For example, a unipolar step motor might consume channel 1, 2, 3, and 4. This array would then be equal to \{1, 2, 3, 4\}. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

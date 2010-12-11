@@ -1,0 +1,103 @@
+\hypertarget{_shift_stepper_8cpp}{
+\section{C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/ShiftStepper.cpp File Reference}
+\label{_shift_stepper_8cpp}\index{C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/ShiftStepper.cpp@{C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/ShiftStepper.cpp}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include $<$avr/io.h$>$}\par
+{\ttfamily \#include $<$inttypes.h$>$}\par
+{\ttfamily \#include $<$avr/interrupt.h$>$}\par
+{\ttfamily \#include \char`\"{}WProgram.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}wiring.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}wiring\_\-private.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pins\_\-arduino.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}HardwareSerial.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}shiftStepper.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}{\_\-\_\-shiftSixteenBytes\_\-\_\-}~2
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_a96af413ea9d141d8192568ae9425f363}{\_\-\_\-shiftSixteenFirst\_\-\_\-}~0
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_ac5c0b389a81e12fc3319f49797c7024a}{\_\-\_\-shiftSixteenLast\_\-\_\-}~15
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_aa603edb13f3837f481018aef04709dd5}{\_\-\_\-shiftSixBytes\_\-\_\-}~1
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_a42e0c3a701a6b9c4e4564b150a9b2084}{\_\-\_\-shiftSixFirst\_\-\_\-}~1
+\item 
+\#define \hyperlink{_shift_stepper_8cpp_a386cb6b80acfa854979ebb8ff4e02c96}{\_\-\_\-shiftSixLast\_\-\_\-}~6
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{_shift_stepper_8cpp_ad9a42607fb7932f44ba914ac49972e62}{\_\-\_\-cxa\_\-guard\_\-acquire} (\_\-\_\-guard $\ast$g)
+\item 
+void \hyperlink{_shift_stepper_8cpp_adef76ddddaddf969efa3bfad968fd430}{\_\-\_\-cxa\_\-guard\_\-release} (\_\-\_\-guard $\ast$g)
+\item 
+void \hyperlink{_shift_stepper_8cpp_a357afb2dc20a652447f3a529dbda60e4}{\_\-\_\-cxa\_\-guard\_\-abort} (\_\-\_\-guard $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{_shift_stepper_8cpp_aa603edb13f3837f481018aef04709dd5}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixBytes\_\-\_\-@{\_\-\_\-shiftSixBytes\_\-\_\-}}
+\index{\_\-\_\-shiftSixBytes\_\-\_\-@{\_\-\_\-shiftSixBytes\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixBytes\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixBytes\_\-\_\-~1}}
+\label{_shift_stepper_8cpp_aa603edb13f3837f481018aef04709dd5}
+\hypertarget{_shift_stepper_8cpp_a42e0c3a701a6b9c4e4564b150a9b2084}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixFirst\_\-\_\-@{\_\-\_\-shiftSixFirst\_\-\_\-}}
+\index{\_\-\_\-shiftSixFirst\_\-\_\-@{\_\-\_\-shiftSixFirst\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixFirst\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixFirst\_\-\_\-~1}}
+\label{_shift_stepper_8cpp_a42e0c3a701a6b9c4e4564b150a9b2084}
+\hypertarget{_shift_stepper_8cpp_a386cb6b80acfa854979ebb8ff4e02c96}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixLast\_\-\_\-@{\_\-\_\-shiftSixLast\_\-\_\-}}
+\index{\_\-\_\-shiftSixLast\_\-\_\-@{\_\-\_\-shiftSixLast\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixLast\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixLast\_\-\_\-~6}}
+\label{_shift_stepper_8cpp_a386cb6b80acfa854979ebb8ff4e02c96}
+\hypertarget{_shift_stepper_8cpp_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixteenBytes\_\-\_\-@{\_\-\_\-shiftSixteenBytes\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenBytes\_\-\_\-@{\_\-\_\-shiftSixteenBytes\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixteenBytes\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenBytes\_\-\_\-~2}}
+\label{_shift_stepper_8cpp_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}
+\hypertarget{_shift_stepper_8cpp_a96af413ea9d141d8192568ae9425f363}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixteenFirst\_\-\_\-@{\_\-\_\-shiftSixteenFirst\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenFirst\_\-\_\-@{\_\-\_\-shiftSixteenFirst\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixteenFirst\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenFirst\_\-\_\-~0}}
+\label{_shift_stepper_8cpp_a96af413ea9d141d8192568ae9425f363}
+\hypertarget{_shift_stepper_8cpp_ac5c0b389a81e12fc3319f49797c7024a}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-shiftSixteenLast\_\-\_\-@{\_\-\_\-shiftSixteenLast\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenLast\_\-\_\-@{\_\-\_\-shiftSixteenLast\_\-\_\-}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-shiftSixteenLast\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenLast\_\-\_\-~15}}
+\label{_shift_stepper_8cpp_ac5c0b389a81e12fc3319f49797c7024a}
+
+
+\subsection{Function Documentation}
+\hypertarget{_shift_stepper_8cpp_a357afb2dc20a652447f3a529dbda60e4}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-cxa\_\-guard\_\-abort@{\_\-\_\-cxa\_\-guard\_\-abort}}
+\index{\_\-\_\-cxa\_\-guard\_\-abort@{\_\-\_\-cxa\_\-guard\_\-abort}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-cxa\_\-guard\_\-abort}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-cxa\_\-guard\_\-abort (
+\begin{DoxyParamCaption}
+\item[{\_\-\_\-guard $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{_shift_stepper_8cpp_a357afb2dc20a652447f3a529dbda60e4}
+\hypertarget{_shift_stepper_8cpp_ad9a42607fb7932f44ba914ac49972e62}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-cxa\_\-guard\_\-acquire@{\_\-\_\-cxa\_\-guard\_\-acquire}}
+\index{\_\-\_\-cxa\_\-guard\_\-acquire@{\_\-\_\-cxa\_\-guard\_\-acquire}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-cxa\_\-guard\_\-acquire}]{\setlength{\rightskip}{0pt plus 5cm}int \_\-\_\-cxa\_\-guard\_\-acquire (
+\begin{DoxyParamCaption}
+\item[{\_\-\_\-guard $\ast$}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_shift_stepper_8cpp_ad9a42607fb7932f44ba914ac49972e62}
+\hypertarget{_shift_stepper_8cpp_adef76ddddaddf969efa3bfad968fd430}{
+\index{ShiftStepper.cpp@{ShiftStepper.cpp}!\_\-\_\-cxa\_\-guard\_\-release@{\_\-\_\-cxa\_\-guard\_\-release}}
+\index{\_\-\_\-cxa\_\-guard\_\-release@{\_\-\_\-cxa\_\-guard\_\-release}!ShiftStepper.cpp@{ShiftStepper.cpp}}
+\subsubsection[{\_\-\_\-cxa\_\-guard\_\-release}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-cxa\_\-guard\_\-release (
+\begin{DoxyParamCaption}
+\item[{\_\-\_\-guard $\ast$}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_shift_stepper_8cpp_adef76ddddaddf969efa3bfad968fd430}
