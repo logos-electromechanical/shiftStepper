@@ -1,6 +1,6 @@
 /*
   ShiftStepper.cpp - ShiftStepper library for Arduino
-  v0.01a Alpha
+  v0.02a Alpha
   (c) Logos Electromechanical LLC 2010
   Licensed under CC-BY-SA 3.0 
 
@@ -16,6 +16,105 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
 
 */
+
+/*!
+  \mainpage
+  \section intro Introduction
+  This library is written for the line of shift register controlled output boards 
+  produced by Logos Electromechanical, LLC. It is intended to be flexible enough to 
+  support all of the shift register interface boards current in production and 
+  planned for the future. Therefore, it has pieces that are not strictly necessary 
+  for those currently on the market.
+
+  The highest level object in this library is shiftChain, generally referred to as a
+  chain. A chain is a set of one or more shift register boards. The farthest from 
+  the host (along the daisy chain cable) is board 0 and the one closest to the host
+  has the highest index. This little endian structure mirrors the operation of the 
+  shift register chain, i.e. the first bit shifted ends up the farthest from the 
+  host at the end of the shifting operation. Each board, represented by a shiftBoard
+  object, contains one or more devices, each represented by a shiftDevice object. 
+  A device is a group of one or more channels that operate togeter -- for example, 
+  the four switches that drive a unipolar stepper motor. The only device types currently implemented are the shiftStepMotor and 
+  shiftSwitchBlock. 
+  
+  A channel is the smallest logical element on the board. On all 
+  of the shift register boards so far, a channel is a single switch controlled by a 
+  single bit. Future boards may have channels that involve many more bits; hence the
+  term should be taken as generic.
+
+  New data is shifted out to the chain by calling shiftChain::doTick(). This can be called 
+  from inside the loop() function, but for the best stepper performance, it should be 
+  called by a timer interrupt service routine. The shiftChain object has member functions 
+  for setting up the timer correctly, but the user must supply the interrupt service 
+  routine. Only Timer 2 is implemented so far; adding more is also on the TODO list. 
+
+  shiftChain::doTick() calls the shiftBoard::doBoardTick() for each board in the chain. In 
+  turn, each example of shiftBoard::doBoardTick() calls shiftDevice::doDeviceTick() for 
+  each device in that board. These function are defined as virtual functions in the 
+  shiftBoard and shiftDevice classes; individual boards and devices are implemented 
+  subclasses of these two classes, respectively, and must implement 
+  shiftBoard::doBoardTick() and shiftDevice::doDeviceTick().
+
+  The aim of all of this is to allow each board and each applicaiton of that board to be 
+  separately defined in a way that still plays nice together in a (potentially) long chain 
+  of such device and allows the addition of new boards and applications without disrupting 
+  source code based on this version of the library. 
+  
+  \section install Installation
+  
+  In order to install this library, copy this directory into the arduino libraries 
+  directory.
+
+  Then restart the Arduino IDE and it should appear in the Tools/Import Library 
+  pulldown and in the File/Examples pulldown.
+  
+  \section using Using the Library
+  
+  The first step is declaring the devices that make up each board, each board, and 
+  the chain, in that order. There are clever ways to do this, but the simplest and 
+  most fool-proof way to do it is to declare all the objects at global scope. Here's
+  how I do it in the included examples:
+
+  \code
+  static const uint8_t stepSequence[4] = {0x2, 0x4, 0x1, 0x8}; 
+
+  static const uint8_t motChans0[__channelsPerMotor__] = {0,2,3,1}; 
+  static const uint8_t motChans1[__channelsPerMotor__] = {4,5,6,7}; 
+  static const uint8_t motChans2[__channelsPerMotor__] = {11,9,10,8}; 
+  static const uint8_t motChans3[__channelsPerMotor__] = {15,14,13,12}; 
+
+  shiftChain *myChain = 0; 
+  shiftStepMotor motor0(__channelsPerMotor__, stepSequence, motChans0); 
+  shiftStepMotor motor1(__channelsPerMotor__, stepSequence, motChans1); 
+  shiftStepMotor motor2(__channelsPerMotor__, stepSequence, motChans2); 
+  shiftStepMotor motor3(__channelsPerMotor__, stepSequence, motChans3); 
+  shiftDevice *motors[4] = {&motor0, &motor1, &motor2, &motor3}; 
+  shiftSixteen board0(4, motors); shiftBoard *boards[1] = {&board0}; 
+  shiftChain storeChain(1, boards, DATPIN, SCLPIN, LATPIN, MRPIN, INDPIN);
+  \endcode
+
+  All of these declarations could alternately be made static in the setup() 
+  function, with the exception of the declaration of *myChain, which has to be 
+  global in order to be useful. There are no blank constructors defined for any of 
+  these objects, so they must be fully initialized at declaration; that drives the 
+  order of the declaration in the above snippet. The various arrays are declared as 
+  global variables here due to the lack of proper array literals in C++.
+
+  Once you've declared all the members of the chain, you define the interrupt 
+  routine as shown above, assign the myChain pointer to point at storeChain, and 
+  start the timer:
+
+  \code
+  myChain = &storeChain; 
+  myChain->startTimer(__preScaler32__, 0, 2);
+  \endcode
+  
+  After that, the interrupt will execute every time the selected timer interrupt 
+  trips. What it does depends on what each device has been commanded to do. See the
+  subclasses of shiftDevice for documentation of the command functions.
+  
+ */
+ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -30,15 +129,6 @@
 
 #include "shiftStepper.h"
 
-// defines for the sixteen channel board
-#define __shiftSixteenBytes__ 	2
-#define __shiftSixteenFirst__ 	0
-#define __shiftSixteenLast__	15
-
-// defines for the six channel board
-#define __shiftSixBytes__ 		1
-#define __shiftSixFirst__ 		1
-#define __shiftSixLast__		6
 
 /////////////////
 // shiftDevice //
@@ -68,13 +158,13 @@ uint8_t shiftDevice::getChanCount (void) {
   seqSteps. This array must be allocated either statically or at global scope.
   \param *channels The array of channel numbers used by the motor. Must have 
   four elements. The order of the channels in this array determines how the
-  members of sequence[] are interpreted. This array must be allocated either 
-  statically or at global scope.
+  members of sequence[] are interpreted. This array need not be permanently 
+  allocated.
 */
 
 shiftStepMotor::shiftStepMotor (const uint8_t seqSteps, 
-	const uint8_t *sequence, 
-	const uint8_t *channels) 
+								const uint8_t *sequence, 
+								const uint8_t *channels) 
 {
 	uint8_t i;
 	
@@ -238,12 +328,23 @@ int16_t shiftStepMotor::getStepsToGo (void)
 }
 
 /*!
-  This function manages the per-tick behavior of a stepper motor device.
+  This function manages the per-tick behavior of a stepper motor device. It is 
+  expected to be called from the doBoardTick() function of the board that contains
+  this device.
+  
   It performs the following tasks:
-	- Checks whether or not it's time to make a step, based on the values of stepSpeed, lastStep, and stepsToGo
+	- Checks whether or not it's time to make a step, based on the values of 
+	stepSpeed, lastStep, and stepsToGo
 	- Writes the current switch state to the bits corresponding to the output 
 	channels in the boardBytes[] array
-*/
+	
+  \param bytesPerBoard This tells the function how many bytes of shift register are
+  in the output board.
+  
+  \param *boardBytes This is a pointer to the array of bytes that the doBoardTick() 
+  function this is called from uses to write to the array of bytes that is then
+  shifted out to the boards themselves.
+ */
  
 void shiftStepMotor::doDevTick (uint8_t bytesPerBoard,
 	uint8_t *boardBytes)
@@ -279,7 +380,7 @@ void shiftStepMotor::doDevTick (uint8_t bytesPerBoard,
 		k = j >> 3;					// bytes in which this channel is (equivalent to divide by 8)
 		m = j % 8;					// get the bit within that bytes		 
 		if (k > (bytesPerBoard - 1)) { break; }	// if we're going to break out of our
-													// array, then break out of the loop
+												// array, then break out of the loop
 		if ((n >> i) & 0x1) 		// if we need to set this bit
 		{
 			boardBytes[k] |= (0x1 << m);	// set the mth bit of the kth byte
@@ -299,6 +400,108 @@ void shiftStepMotor::doDevTick (uint8_t bytesPerBoard,
  uint8_t	shiftStepMotor::getSeqStep (void)
 {
 	return this->sequence[this->stepState];
+}
+
+//////////////////////
+// shiftSwitchBlock //
+//////////////////////
+
+// Constructor //
+
+/*!
+  The default number of channels is set by __channelsPerSwitchBlockDefault__, 
+  defined in shiftStepper.h. 
+  \param *channels The array of channel numbers. This must have at least
+  __channelsPerSwitchBlockDefault__ entries. It must be declared static or at 
+  global scope, or otherwise permanently allocated. 
+ */
+
+shiftSwitchBlock::shiftSwitchBlock (uint8_t *chans)
+{
+	this->channels 		= chans;
+	this->chanCount 	= __channelsPerSwitchBlockDefault__;
+	this->switches		= 0;
+}
+
+/*!
+  \param chanCount The number of channels that this device controls. 
+  \param *channels The array of channel numbers. This must have at least chanCount 
+  entries. It must be declared static or at global scope, or otherwise permanently 
+  allocated. 
+ */
+
+shiftSwitchBlock::shiftSwitchBlock (uint8_t chanCnt, uint8_t *chans)
+{
+	if (chanCount > __channelsPerSwitchBlockMax__) 
+	{
+		this->chanCount = __channelsPerSwitchBlockMax__;
+	} else
+	{
+		this->chanCount = chanCnt;
+	}
+	this->channels 		= chans;
+	this->switches		= 0;
+}
+
+// Public Members //
+
+/*!
+  \param positions This is a bit string representing the position of the switches
+  The LSB controls channels[0], the next controls channels[1], etc.
+  \return Attempt status. This is not implemented yet; it always returns 0.
+ */
+
+uint8_t shiftSwitchBlock::setSwitches (uint8_t positions) 
+{
+	this->switches = positions;
+	return 0;
+}
+	
+/*!
+  \return The bit string representing the current switch positions
+ */
+ 
+uint8_t shiftSwitchBlock::getSwitches (void)
+{
+	return this->switches;
+}
+
+/*!
+  This function manages the per-tick behavior of a block of switches. It is 
+  expected to be called from the doBoardTick() function of the board that contains
+  this device.
+  
+  This function writes the switches specified in the channels array with the states
+  specified in the bit string written with setSwitches().
+  
+  \param bytesPerBoard This tells the function how many bytes of shift register are
+  in the output board.
+  
+  \param *boardBytes This is a pointer to the array of bytes that the doBoardTick() 
+  function this is called from uses to write to the array of bytes that is then
+  shifted out to the boards themselves.
+ */
+
+void shiftSwitchBlock::doDevTick (uint8_t bytesPerBoard, uint8_t *boardBytes)
+{
+	int i, j, k, m, n, x;
+	n = this->chanCount;
+	x = this->switches;
+	for (i = 0; i < n; i++)
+	{
+		j = this->channels[i];		// get the channel number
+		k = j >> 3;					// bytes in which this channel is (equivalent to divide by 8)
+		m = j % 8;					// get the bit within that bytes		 
+		if (k > (bytesPerBoard - 1)) { break; }	// if we're going to break out of our
+												// array, then break out of the loop
+		if ((x >> i) & 0x1) 		// if we need to set this bit
+		{
+			boardBytes[k] |= (0x1 << m);	// set the mth bit of the kth byte
+		} else
+		{
+			boardBytes[k] &= ~(0x1 << m);	// clear the mth bit of the kth byte
+		}
+	}
 }
 
 ////////////////
@@ -324,6 +527,7 @@ uint8_t shiftBoard::getDevCount (void)
 
 shiftDevice* shiftBoard::getDev (uint8_t index)
 {
+
 	return this->devices[index];
 }
 
@@ -437,6 +641,132 @@ void shiftSix::doBoardTick(uint8_t chainSize,
 	
 }
 
+//////////////////////
+// shiftBoardDirect //
+//////////////////////
+
+// Public Members //
+
+/*!
+  \return The number of bytes of shift register on this board
+ */
+		
+uint8_t shiftBoardDirect::getBoardSize (void)
+{ 
+	return this->byteCount;
+}
+
+/*!
+  \param bytes An array of bytes representing the desired output state of the board. 
+  Must have at least as many members as specified by the output of 
+  shiftBoardDirect::getBoardSize()
+  \return Exit status. Always returns 0 (success) now
+ */
+
+uint8_t	shiftBoardDirect::setBoardOutput (uint8_t *bytes)
+{
+	int i, j;
+	j = this->byteCount;
+	for (i = 0; i < j; i++)
+	{
+		this->bytes[i] = bytes[i];
+	}
+	return 0;
+}
+
+////////////////////////
+// shiftSixteenDirect //
+////////////////////////
+
+// Constructors //
+
+/*!
+  \param *bytes An array of bytes defining the initial state of the output switches.
+ */
+
+shiftSixteenDirect::shiftSixteenDirect (uint8_t *bytes) 
+{
+	this->byteCount		= __shiftSixteenBytes__;
+	this->firstChan		= __shiftSixteenFirst__;
+	this->lastChan		= __shiftSixteenLast__;
+	this->bytes[0]		= bytes[0];
+	this->bytes[1]		= bytes[1];
+}
+
+/*!
+  
+ */
+
+shiftSixteenDirect::shiftSixteenDirect (void) 
+{
+	this->byteCount		= __shiftSixteenBytes__;
+	this->firstChan		= __shiftSixteenFirst__;
+	this->lastChan		= __shiftSixteenLast__;
+	this->bytes[0]		= 0;
+	this->bytes[1]		= 0;
+}
+
+// Public Members //
+
+/*!
+  \param chainSize The number of bytes in the entire daisy chain of boards
+  \param firstByte The index of the first byte assigned to this board
+  \param *chainBytes The array of bytes that will be shifted out to the chain.
+ */
+
+void shiftSixteen::doBoardTick(uint8_t chainSize, 
+	uint8_t firstByte, 
+	uint8_t *chainBytes)
+{
+	chainBytes[firstByte + 1] 	= this->bytes[0];	// flip the order of the bytes
+	chainBytes[firstByte] 		= this->bytes[1];	// so everything goes out in the right order
+}
+
+////////////////////
+// shiftSixDirect //
+////////////////////
+
+// Constructors //
+
+/*!
+  \param *bytes An array of bytes defining the initial state of the output switches.
+ */
+
+shiftSixDirect::shiftSixDirect (uint8_t outByte) 
+{
+	this->byteCount		= __shiftSixBytes__;
+	this->firstChan		= __shiftSixFirst__;
+	this->lastChan		= __shiftSixLast__;
+	this->bytes[0]		= outByte;
+}
+
+/*!
+  
+ */
+
+shiftSixDirect::shiftSixDirect (void) 
+{
+	this->byteCount		= __shiftSixBytes__;
+	this->firstChan		= __shiftSixFirst__;
+	this->lastChan		= __shiftSixLast__;
+	this->bytes[0]		= 0;
+}
+
+// Public Members //
+
+/*!
+  \param chainSize The number of bytes in the entire daisy chain of boards
+  \param firstByte The index of the first byte assigned to this board
+  \param *chainBytes The array of bytes that will be shifted out to the chain.
+ */
+
+void shiftSixteen::doBoardTick(uint8_t chainSize, 
+	uint8_t firstByte, 
+	uint8_t *chainBytes)
+{
+	chainBytes[firstByte] 	= this->bytes[0];	// flip the order of the bytes
+}
+
 ////////////////
 // ShiftChain //
 ////////////////
@@ -444,13 +774,18 @@ void shiftSix::doBoardTick(uint8_t chainSize,
 // Constructor //
 
 /*!
-  \param boardCount
-  \param **boards
-  \param dataPin
-  \param clockPin
-  \param latchPin
-  \param latchPin
-  \param resetPin
+  \param boardCount The number of boards attached to the chain
+  \param **boards An array of pointers to the board objects. Storage for the array 
+  and the board objects must be allocated before calling the constructor, such as 
+  by declaring them statically or globally.
+  \param dataPin The Arduino pin used to transmit data to the shift register(s). On 
+  the sixteen channel board, this is pin 13.
+  \param clockPin The Arduino pin used to clock the shift register(s). On the sixteen
+  channel board, this is pin 12.
+  \param latchPin The Arduino pin used to latch the shifted data into the shift 
+  register output. On the sixteen channel board, this is pin 7.
+  \param resetPin The Arduino pin that drives the master reset for the shift register
+  chain. On the sixteen channel board, this is pin 8.
  */
 
 shiftChain::shiftChain (uint8_t	boardCount, 
@@ -499,6 +834,23 @@ shiftChain::shiftChain (uint8_t	boardCount,
 		this->byteCount += this->boards[i]->getBoardSize();
 	}
 }
+
+/*!
+  \param boardCount The number of boards attached to the chain
+  \param **boards An array of pointers to the board objects. Storage for the array 
+  and the board objects must be allocated before calling the constructor, such as 
+  by declaring them statically or globally.
+  \param dataPin The Arduino pin used to transmit data to the shift register(s). On 
+  the sixteen channel board, this is pin 13.
+  \param clockPin The Arduino pin used to clock the shift register(s). On the sixteen
+  channel board, this is pin 12.
+  \param latchPin The Arduino pin used to latch the shifted data into the shift 
+  register output. On the sixteen channel board, this is pin 7.
+  \param resetPin The Arduino pin that drives the master reset for the shift register
+  chain. On the sixteen channel board, this is pin 8.
+  \param indexPin This pin turns on while shiftChain::doTick() is running. This allows
+  precise timing measurement.
+ */
 
 shiftChain::shiftChain (uint8_t	boardCount, 
 	shiftBoard	**boards,
@@ -662,6 +1014,26 @@ void shiftChain::fastShiftOut (uint8_t *bytes)
 
 // Public Members //
 
+/*!
+  This starts the timer directed by the timer parameter with the given pre-scaler 
+  and reset value. It also activates the overflow interrupt for the given timer. 
+  \param prescaler Select the timer pre-scaler. This is the value that the main 
+  processor clock is divided by to clock the timer. #define values are provide 
+  for all the supported pre-scaler values:
+	- __preScaler32__
+	- __preScaler64__
+	- __preScaler128__
+	- __preScaler256__
+	- __preScaler1024__
+  If an un-supported value is passed in here, the pre scaler defaults to 1024.
+  \param timerVal This is the value that the timer resets to after each time it 
+  overflows. The number of ticks of the timer clock between overflows is equal to
+  maxTimerValue - timerVal. Since only 8-bit timers are supported so far, this is
+  an 8-bit value.
+  \param timer The timer to start. The only supported timer right now is 2; selecting
+  any other timer will result in an error.
+  \return Returns a 0 if timer 2 is selected; otherwise -1.
+ */
 uint8_t shiftChain::startTimer (uint8_t prescaler, uint8_t timerVal, uint8_t timer) 
 {
 	
@@ -690,7 +1062,7 @@ uint8_t shiftChain::startTimer (uint8_t prescaler, uint8_t timerVal, uint8_t tim
 			case __preScaler256__:
 				TCCR2B &= ~(1<<CS20);		// set prescaler to 256
 				break;
-			case __preScaler1024__:			// leave prescaler at 256
+			case __preScaler1024__:			// leave prescaler at 1024
 			default:
 				break;
 		}
@@ -699,6 +1071,11 @@ uint8_t shiftChain::startTimer (uint8_t prescaler, uint8_t timerVal, uint8_t tim
 		return 0;
 	} else { return -1; }
 }
+
+/*!
+  \return This returns status. However, the error checking/status functionality is
+  not implemented, so it always returns 0 (success).
+ */
 
 uint8_t shiftChain::stopTimer (void)
 {
@@ -709,16 +1086,37 @@ uint8_t shiftChain::stopTimer (void)
 	} else { return -1; }
 }
 
+/*!
+  \return The number of boards in this chain
+ */
+
 uint8_t shiftChain::getBoardCount (void)
 {
 	return (this->boardCount);
 }
+
+/*!
+  \param index The array index of the desired board object
+  \return A pointer to the selected board object
+ */
 
 shiftBoard* shiftChain::getBoard (uint8_t index)
 {
 	return this->boards[index];
 }
 
+/*!
+  This can be called from a loop, but you get the most consistent results from calling
+  it from an ISR, such as follows:
+  \code
+  ISR (TIMER2_OVF_vect)
+      {
+	      myChain->doTick();
+      }
+  \endcode
+  Calling it in this fashion gives consistent speed from stepper motors and the like.
+ */
+ 
 void shiftChain::doTick (void)
 {
 	uint8_t i, byteCnt, boardCnt, bytesSoFar = 0;
@@ -760,9 +1158,23 @@ void shiftChain::doTick (void)
 	
 }
 
-// This is some strange linker food required to make it all work
-// see http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
-
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
 int __cxa_guard_acquire(__guard *g) {return !*(char *)(g);}; 
+
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
 void __cxa_guard_release (__guard *g) {*(char *)g = 1;}; 
+
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
 void __cxa_guard_abort (__guard *) {}; 

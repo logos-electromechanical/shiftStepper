@@ -1,6 +1,6 @@
 /*
   ShiftStepper.h - ShiftStepper library for Arduino
-  v0.01a Alpha
+  v0.02a Alpha
   (c) Logos Electromechanical LLC 2010
   Licensed under CC-BY-SA 3.0 
 
@@ -25,10 +25,12 @@
 #include <avr/io.h>
 #include <inttypes.h>
 
-	/// Number of channels in each shiftSwitchBlock device
-#define __channelsPerSwitchBlock__		4
+	/// Default number of channels in each shiftSwitchBlock device
+#define __channelsPerSwitchBlockDefault__		4
+	/// Max number of channels in each shiftSwitchBlock device
+#define __channelsPerSwitchBlockMax__			8
 	/// Number of channels each stepper motor consumes
-#define __channelsPerMotor__			4 		
+#define __channelsPerMotor__				4 		
 	/// Maximum speed of each motor. 
 #define __maxMotorSpeed__				255		
 	/// Sets timer pre-scaler to 32
@@ -42,12 +44,38 @@
 	/// Sets timer pre-scaler to 1024
 #define __preScaler1024__				7		
 
+// defines for the sixteen channel board
+	/// The number of bytes on a sixteen channel board
+#define __shiftSixteenBytes__ 	2
+	/// The index of the lowest channel on a six channel board
+#define __shiftSixteenFirst__ 	0
+	/// The index of the highest channel on a six channel board
+#define __shiftSixteenLast__	15
+
+// defines for the six channel board
+	/// The number of bytes on a six channel board
+#define __shiftSixBytes__ 		1
+	/// The index of the lowest channel on a six channel board
+#define __shiftSixFirst__ 		1
+	/// The index of the highest channel on a six channel board
+#define __shiftSixLast__		6
+
+
 	/// Default step sequence for full stepping
+	/*!
+	  See http://www.cs.uiowa.edu/~jones/step/types.html#unipolar for more details
+	 */
 static const uint8_t default4StepSequence[4] = {0x1, 0x2, 0x4, 0x8};					
 	///	Default step sequence for half stepping
+	/*!
+	  See http://www.cs.uiowa.edu/~jones/step/types.html#unipolar for more details
+	 */
 static const uint8_t default8StepSequence[8] = {0x1,0x3,0x2,0x6,0x4,0xc,0x8,0x9};		
 
 	/// Abstract base class for creating devices such as motors that attach to a board
+	/*!
+	  A shiftDevice object represents an object controlled by a shift register board. 
+	 */
 class shiftDevice
 {
 	protected:	
@@ -75,7 +103,7 @@ class shiftDevice
 			  Must be re-implemented by each sub-class.
 			*/
 		virtual void 	doDevTick (uint8_t bytesPerBoard, 
-									uint8_t *boardBytes);
+								   uint8_t *boardBytes);
 			/// Get the byte array that holds the channels that the device occupies
 		uint8_t 		*getChannels (void);	
 			/// Get the number of channels the device occupies
@@ -83,16 +111,19 @@ class shiftDevice
 };	
 
 	/// Implementation of a 4-phase unipolar stepper motor device
+	/*!
+	
+	 */
 class shiftStepMotor : public shiftDevice
 {
 	private:
 		uint8_t		stepState;		// Current index in the step sequence
 		int16_t		stepSpeed;		// Sign gives directions, __maxMotorSpeed - magnitude + 1 is the number of timer ticks per step
 		uint8_t		lastStep;		// Number of timer ticks since last step
-		int16_t	stepsToGo;		// Number of steps to go until we finish the current set; set to -1 for continuous rotation
+		int16_t		stepsToGo;		// Number of steps to go until we finish the current set; set to -1 for continuous rotation
 		const uint8_t		*sequence;		// An array of pin configurations that correspond to the steps
 		uint8_t		seqSteps;		// Number of steps in the sequence of switch positions
-		uint8_t		channels[__channelsPerMotor__];		/// The array of channels in the board that correspond to the drive channels for this motor, measured in bits
+		uint8_t		channels[__channelsPerMotor__];		// The array of channels in the board that correspond to the drive channels for this motor, measured in bits
 		uint8_t		chanCount;		// Number of channels in the array 
 		void 		incrSeq (void); // Increment the step sequence by 1
 		void 		decrSeq	(void); // Decrement the step sequence by 1
@@ -119,25 +150,36 @@ class shiftStepMotor : public shiftDevice
 		uint8_t		getSeqStep (void);							
 			/// Local implementation of per timer tick behavior
 		void 		doDevTick (uint8_t bytesPerBoard, 
-								uint8_t *boardBytes);
+							   uint8_t *boardBytes);
 };
 	/// A block of plain switches
+	/*!
+	
+	 */
 class shiftSwitchBlock : public shiftDevice
 {
 	private:
-		uint8_t		channels[__channelsPerSwitchBlock__];		
-		uint8_t		chanCount;		
+			/// Switch positions
+		uint8_t switches;
 	public:
-		shiftStepMotor (const uint8_t *channels);
+			/// Create a new shiftSwichBlock object, with the default number of channels.
+		shiftSwitchBlock (uint8_t *channels);
+			/// Create a new shiftSwitchBlock object, with a variable number of channels.
+		shiftSwitchBlock (uint8_t chanCount, 
+						  uint8_t *channels);
 			/// Set switch positions
 		uint8_t		setSwitches (uint8_t positions);
 			/// Get switch positions
 		uint8_t		getSwitches (void);				
 			/// Local implementation of per timer tick behavior
 		void 		doDevTick (uint8_t bytesPerBoard, 
-								uint8_t *boardBytes);
-}
-	/// Abstract base class for individual boards
+							   uint8_t *boardBytes);
+};
+
+	/// Abstract base class for individual boards with shiftDevice.
+	/*!
+	  This base class covers boards which contain one or more shiftDevice objects.
+	 */
 class shiftBoard
 {
 	protected:
@@ -154,8 +196,8 @@ class shiftBoard
 	public:
 			/// Handle for per timer tick behavior of each board
 		virtual void 	doBoardTick (uint8_t chainSize, 
-									uint8_t firstByte, 
-									uint8_t *chainBytes);
+									 uint8_t firstByte, 
+									 uint8_t *chainBytes);
 			/// Get the number of objects associated with the board
 		uint8_t			getDevCount (void);			
 			/// Get pointer to device at index
@@ -165,46 +207,117 @@ class shiftBoard
 };
 
 	/// Implementation of shiftBoard for a sixteen channel high current Arduino shield
+	/*!
+	
+	 */
 class shiftSixteen : public shiftBoard
 {
 	public:
-			/// Create a ShiftSixteen object
+			/// Create a ShiftSixteen board object
 		shiftSixteen (
-						/// Number of devices 
 					uint8_t devCount, 
-						/// Array of pointers to device objects
 					shiftDevice **devices);
 			/// Do a timer tick for a sixteen channel board
 		void doBoardTick(
-							/// Total number of bytes in the chain
 						uint8_t chainSize, 
-							/// First byte in chainBytes that this function writes to
 						uint8_t firstByte, 
-							/// Array of bytes to be shifted out
 						uint8_t *chainBytes);
 };
 
 	/// Implementation of shiftBoard for a six channel high current Arduino shield
+	/*!
+	
+	 */
 class shiftSix : public shiftBoard
 {
 	public:
-			/// Create a ShiftSix object
+			/// Create a new shiftSix board object
 		shiftSix (
-						/// Number of devices 
 					uint8_t devCount, 
-						/// Array of pointers to device objects
 					shiftDevice **devices);
+			/// Do a timer tick for a six channel board
+		void doBoardTick(
+						uint8_t chainSize, 
+						uint8_t firstByte, 
+						uint8_t *chainBytes);
+};
+
+	/// Abstract base class for individual boards, without shiftDevice objects.
+	/*!
+	  This base class differs from shiftBoard in that it is designed to enable the user
+	  to write directly to the bits shifted to the board, without the intervention of
+	  any devices. This will be faster in applications that do not require the 
+	  bookkeeping of stepper applications or similar. 
+	  
+	  
+	 */
+class shiftBoardDirect
+{
+	protected:
+			/// Number of bytes of shift register on the board 
+		uint8_t			byteCount;	
+			/// First active channel/byte/bit on the board
+		uint8_t			firstChan;	
+			/// Last active channel/byte/bit on the board
+		uint8_t 		lastChan;	
+			/// Array of bytes in the board
+		uint8_t			*bytes;
+	public:
+			/// Handle for per timer tick behavior of each board
+		virtual void 	doBoardTick (uint8_t chainSize, 
+									 uint8_t firstByte, 
+									 uint8_t *chainBytes);
+			/// Get the size of the board's datastream, in bytes
+		uint8_t			getBoardSize (void);	
+			/// Set the board's output
+		uint8_t			setBoardOutput (uint8_t *bytes);
+};
+
+	/// Implementation of shiftBoardDirect for a sixteen channel high current Arduino shield
+	/*!
+	
+	 */
+class shiftSixteenDirect : public shiftBoardDirect
+{
+	private:
+		uint8_t bytes[__shiftSixteenBytes__];
+	public:
+			/// Create a ShiftSixteenDirect board object with the state defined in *bytes.
+		shiftSixteenDirect (uint8_t *bytes);
+			/// Create a ShiftSixteenDirect board object with a zero state.
+		shiftSixteenDirect (void);
 			/// Do a timer tick for a sixteen channel board
 		void doBoardTick(
-							/// Total number of bytes in the chain
 						uint8_t chainSize, 
-							/// First byte in chainBytes that this function writes to
 						uint8_t firstByte, 
-							/// Array of bytes to be shifted out
+						uint8_t *chainBytes);
+};
+
+	/// Implementation of shiftBoardDirect for a six channel high current board
+	/*!
+	
+	 */
+class shiftSixDirect : public shiftBoardDirect
+{
+	private:
+		uint8_t bytes[__shiftSixBytes__];
+	public:
+			/// Create a new shiftSixDirect board object with the state defined in *bytes.
+		shiftSixDirect (uint8_t outByte);
+			/// Create a new shiftSixDirect board object with a zero state.
+		shiftSixDirect (void);
+			/// Do a timer tick for a six channel board
+		void doBoardTick(
+						uint8_t chainSize, 
+						uint8_t firstByte, 
 						uint8_t *chainBytes);
 };
 
 	/// Class to represent a daisy chain of boards
+	/*!
+	  Each shiftChain object stores all of the data required to create and use a daisy
+	  chained group of shift register controlled modules, devices, or boards. 
+	 */
 class shiftChain
 {
 	private:
@@ -236,33 +349,20 @@ class shiftChain
 	public: 
 			/// Create a new daisy chain object, without an index output
 		shiftChain (
-						/// The number of boards in the chain
 					uint8_t	boardCount, 
-						/// Array of pointers to ShiftBoard objects
 					shiftBoard	**boards, 
-						/// Arduino pin number to be used for the data line
 					uint8_t dataPin, 
-						/// Arduino pin number to be used for the clock line
 					uint8_t clockPin,
-						/// Arduino pin number to be used for the latch line
 					uint8_t latchPin,
-						///  Arduino pin number to be used for the master reset line
 					uint8_t resetPin);
 			/// Create a new daisy chain object, with an index output
 		shiftChain (
-						/// The number of boards in the chain
 					uint8_t	boardCount, 
-						/// Array of pointers to ShiftBoard objects
 					shiftBoard	**boards, 
-						/// Arduino pin number to be used for the data line
 					uint8_t dataPin, 
-						/// Arduino pin number to be used for the clock line
 					uint8_t clockPin,
-						/// Arduino pin number to be used for the latch line
 					uint8_t latchPin,
-						///  Arduino pin number to be used for the master reset line
 					uint8_t resetPin,
-						/// Arduino pin number to be used for an index output
 					uint8_t indexPin);				
 			/// Get the number of boards in the chain
 		uint8_t		getBoardCount (void);
@@ -270,11 +370,8 @@ class shiftChain
 		shiftBoard	*getBoard (uint8_t index);
 			/// Start the timer
 		uint8_t 	startTimer (
-						/// Select the timer pre-scaler. Defaults to 1024
 					uint8_t prescaler, 
-						/// Select a value for the timer to reset to, for precise control of frequency
 					uint8_t timerVal, 
-						/// Select the timer to use; only Timer 2 works currently
 					uint8_t timer);
 			/// Shut down the current timer
 		uint8_t		stopTimer (void);
@@ -282,13 +379,36 @@ class shiftChain
 		void 		doTick (void);
 };
 
-// This is some strange linker food required to make it all work
-// see http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
 
 __extension__ typedef int __guard __attribute__((mode (__DI__))); 
 
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
+
 extern "C" int __cxa_guard_acquire(__guard *); 
+
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
+
 extern "C" void __cxa_guard_release (__guard *); 
+
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
+
 extern "C" void __cxa_guard_abort (__guard *); 
 
 #endif

@@ -1,0 +1,49 @@
+\hypertarget{main_intro}{}\section{Introduction}\label{main_intro}
+This library is written for the line of shift register controlled output boards produced by Logos Electromechanical, LLC. It is intended to be flexible enough to support all of the shift register interface boards current in production and planned for the future. Therefore, it has pieces that are not strictly necessary for those currently on the market.
+
+The highest level object in this library is \hyperlink{classshift_chain}{shiftChain}, generally referred to as a chain. A chain is a set of one or more shift register boards. The farthest from the host (along the daisy chain cable) is board 0 and the one closest to the host has the highest index. This little endian structure mirrors the operation of the shift register chain, i.e. the first bit shifted ends up the farthest from the host at the end of the shifting operation. Each board, represented by a \hyperlink{classshift_board}{shiftBoard} object, contains one or more devices, each represented by a \hyperlink{classshift_device}{shiftDevice} object. A device is a group of one or more channels that operate togeter -\/-\/ for example, the four switches that drive a unipolar stepper motor. The only device types currently implemented are the \hyperlink{classshift_step_motor}{shiftStepMotor} and \hyperlink{classshift_switch_block}{shiftSwitchBlock}.
+
+A channel is the smallest logical element on the board. On all of the shift register boards so far, a channel is a single switch controlled by a single bit. Future boards may have channels that involve many more bits; hence the term should be taken as generic.
+
+New data is shifted out to the chain by calling \hyperlink{classshift_chain_ad6727d72887b7017f68ef6dc7948a7ed}{shiftChain::doTick()}. This can be called from inside the loop() function, but for the best stepper performance, it should be called by a timer interrupt service routine. The \hyperlink{classshift_chain}{shiftChain} object has member functions for setting up the timer correctly, but the user must supply the interrupt service routine. Only Timer 2 is implemented so far; adding more is also on the TODO list.
+
+\hyperlink{classshift_chain_ad6727d72887b7017f68ef6dc7948a7ed}{shiftChain::doTick()} calls the \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{shiftBoard::doBoardTick()} for each board in the chain. In turn, each example of \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{shiftBoard::doBoardTick()} calls shiftDevice::doDeviceTick() for each device in that board. These function are defined as virtual functions in the \hyperlink{classshift_board}{shiftBoard} and \hyperlink{classshift_device}{shiftDevice} classes; individual boards and devices are implemented subclasses of these two classes, respectively, and must implement \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{shiftBoard::doBoardTick()} and shiftDevice::doDeviceTick().
+
+The aim of all of this is to allow each board and each applicaiton of that board to be separately defined in a way that still plays nice together in a (potentially) long chain of such device and allows the addition of new boards and applications without disrupting source code based on this version of the library.\hypertarget{main_install}{}\section{Installation}\label{main_install}
+In order to install this library, copy this directory into the arduino libraries directory.
+
+Then restart the Arduino IDE and it should appear in the Tools/Import Library pulldown and in the File/Examples pulldown.\hypertarget{main_using}{}\section{Using the Library}\label{main_using}
+The first step is declaring the devices that make up each board, each board, and the chain, in that order. There are clever ways to do this, but the simplest and most fool-\/proof way to do it is to declare all the objects at global scope. Here's how I do it in the included examples:
+
+
+\begin{DoxyCode}
+  static const uint8_t stepSequence[4] = {0x2, 0x4, 0x1, 0x8}; 
+
+  static const uint8_t motChans0[__channelsPerMotor__] = {0,2,3,1}; 
+  static const uint8_t motChans1[__channelsPerMotor__] = {4,5,6,7}; 
+  static const uint8_t motChans2[__channelsPerMotor__] = {11,9,10,8}; 
+  static const uint8_t motChans3[__channelsPerMotor__] = {15,14,13,12}; 
+
+  shiftChain *myChain = 0; 
+  shiftStepMotor motor0(__channelsPerMotor__, stepSequence, motChans0); 
+  shiftStepMotor motor1(__channelsPerMotor__, stepSequence, motChans1); 
+  shiftStepMotor motor2(__channelsPerMotor__, stepSequence, motChans2); 
+  shiftStepMotor motor3(__channelsPerMotor__, stepSequence, motChans3); 
+  shiftDevice *motors[4] = {&motor0, &motor1, &motor2, &motor3}; 
+  shiftSixteen board0(4, motors); shiftBoard *boards[1] = {&board0}; 
+  shiftChain storeChain(1, boards, DATPIN, SCLPIN, LATPIN, MRPIN, INDPIN);
+\end{DoxyCode}
+
+
+All of these declarations could alternately be made static in the setup() function, with the exception of the declaration of $\ast$myChain, which has to be global in order to be useful. There are no blank constructors defined for any of these objects, so they must be fully initialized at declaration; that drives the order of the declaration in the above snippet. The various arrays are declared as global variables here due to the lack of proper array literals in C++.
+
+Once you've declared all the members of the chain, you define the interrupt routine as shown above, assign the myChain pointer to point at storeChain, and start the timer:
+
+
+\begin{DoxyCode}
+  myChain = &storeChain; 
+  myChain->startTimer(__preScaler32__, 0, 2);
+\end{DoxyCode}
+
+
+After that, the interrupt will execute every time the selected timer interrupt trips. What it does depends on what each device has been commanded to do. See the subclasses of \hyperlink{classshift_device}{shiftDevice} for documentation of the command functions. 

@@ -20,8 +20,10 @@ Inheritance diagram for shiftSwitchBlock:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classshift_switch_block_a455f9d6bb935de28027746d01a14814c}{shiftStepMotor} (const uint8\_\-t $\ast$channels)
-\item 
+\hyperlink{classshift_switch_block_acb483c64b961341ff6065b25ea2c4368}{shiftSwitchBlock} (uint8\_\-t $\ast$\hyperlink{classshift_device_ac63a0543346c357134fd207a47976bab}{channels})
+\begin{DoxyCompactList}\small\item\em Create a new shiftSwichBlock object, with the default number of channels. \item\end{DoxyCompactList}\item 
+\hyperlink{classshift_switch_block_ad6e23569570f9f6c37e7dc6e0b360b73}{shiftSwitchBlock} (uint8\_\-t \hyperlink{classshift_device_a8eed8391ef608036d0f55f42348c0e41}{chanCount}, uint8\_\-t $\ast$\hyperlink{classshift_device_ac63a0543346c357134fd207a47976bab}{channels})
+\begin{DoxyCompactList}\small\item\em Create a new \hyperlink{classshift_switch_block}{shiftSwitchBlock} object, with a variable number of channels. \item\end{DoxyCompactList}\item 
 uint8\_\-t \hyperlink{classshift_switch_block_abc0f22095833ef9f9d84ae8b29934357}{setSwitches} (uint8\_\-t positions)
 \begin{DoxyCompactList}\small\item\em Set switch positions. \item\end{DoxyCompactList}\item 
 uint8\_\-t \hyperlink{classshift_switch_block_a292a158fc742c52f2227728c024e9e70}{getSwitches} (void)
@@ -32,6 +34,48 @@ void \hyperlink{classshift_switch_block_ab6bbc5883fc7d966103df29d40ae012e}{doDev
 
 \subsection{Detailed Description}
 A block of plain switches. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classshift_switch_block_acb483c64b961341ff6065b25ea2c4368}{
+\index{shiftSwitchBlock@{shiftSwitchBlock}!shiftSwitchBlock@{shiftSwitchBlock}}
+\index{shiftSwitchBlock@{shiftSwitchBlock}!shiftSwitchBlock@{shiftSwitchBlock}}
+\subsubsection[{shiftSwitchBlock}]{\setlength{\rightskip}{0pt plus 5cm}shiftSwitchBlock::shiftSwitchBlock (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t $\ast$}]{ chans}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_switch_block_acb483c64b961341ff6065b25ea2c4368}
+
+
+Create a new shiftSwichBlock object, with the default number of channels. 
+
+The default number of channels is set by \_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-, defined in \hyperlink{_shift_stepper_8h}{shiftStepper.h}. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$channels} & The array of channel numbers. This must have at least \_\-\_\-channelsPerSwitchBlockDefault\_\-\_\- entries. It must be declared static or at global scope, or otherwise permanently allocated. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classshift_switch_block_ad6e23569570f9f6c37e7dc6e0b360b73}{
+\index{shiftSwitchBlock@{shiftSwitchBlock}!shiftSwitchBlock@{shiftSwitchBlock}}
+\index{shiftSwitchBlock@{shiftSwitchBlock}!shiftSwitchBlock@{shiftSwitchBlock}}
+\subsubsection[{shiftSwitchBlock}]{\setlength{\rightskip}{0pt plus 5cm}shiftSwitchBlock::shiftSwitchBlock (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ chanCnt, }
+\item[{uint8\_\-t $\ast$}]{ chans}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_switch_block_ad6e23569570f9f6c37e7dc6e0b360b73}
+
+
+Create a new \hyperlink{classshift_switch_block}{shiftSwitchBlock} object, with a variable number of channels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chanCount} & The number of channels that this device controls. \\
+\hline
+{\em $\ast$channels} & The array of channel numbers. This must have at least chanCount entries. It must be declared static or at global scope, or otherwise permanently allocated. \\
+\hline
+\end{DoxyParams}
+
 
 \subsection{Member Function Documentation}
 \hypertarget{classshift_switch_block_ab6bbc5883fc7d966103df29d40ae012e}{
@@ -48,6 +92,17 @@ A block of plain switches.
 
 Local implementation of per timer tick behavior. 
 
+This function manages the per-\/tick behavior of a block of switches. It is expected to be called from the doBoardTick() function of the board that contains this device.
+
+This function writes the switches specified in the channels array with the states specified in the bit string written with \hyperlink{classshift_switch_block_abc0f22095833ef9f9d84ae8b29934357}{setSwitches()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytesPerBoard} & This tells the function how many bytes of shift register are in the output board.\\
+\hline
+{\em $\ast$boardBytes} & This is a pointer to the array of bytes that the doBoardTick() function this is called from uses to write to the array of bytes that is then shifted out to the boards themselves. \\
+\hline
+\end{DoxyParams}
 
 
 Reimplemented from \hyperlink{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{shiftDevice}.
@@ -65,6 +120,9 @@ Reimplemented from \hyperlink{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecf
 
 Get switch positions. 
 
+\begin{DoxyReturn}{Returns}
+The bit string representing the current switch positions 
+\end{DoxyReturn}
 \hypertarget{classshift_switch_block_abc0f22095833ef9f9d84ae8b29934357}{
 \index{shiftSwitchBlock@{shiftSwitchBlock}!setSwitches@{setSwitches}}
 \index{setSwitches@{setSwitches}!shiftSwitchBlock@{shiftSwitchBlock}}
@@ -78,17 +136,17 @@ Get switch positions.
 
 Set switch positions. 
 
-\hypertarget{classshift_switch_block_a455f9d6bb935de28027746d01a14814c}{
-\index{shiftSwitchBlock@{shiftSwitchBlock}!shiftStepMotor@{shiftStepMotor}}
-\index{shiftStepMotor@{shiftStepMotor}!shiftSwitchBlock@{shiftSwitchBlock}}
-\subsubsection[{shiftStepMotor}]{\setlength{\rightskip}{0pt plus 5cm}shiftSwitchBlock::shiftStepMotor (
-\begin{DoxyParamCaption}
-\item[{const uint8\_\-t $\ast$}]{ channels}
-\end{DoxyParamCaption}
-)}}
-\label{classshift_switch_block_a455f9d6bb935de28027746d01a14814c}
+
+\begin{DoxyParams}{Parameters}
+{\em positions} & This is a bit string representing the position of the switches The LSB controls channels\mbox{[}0\mbox{]}, the next controls channels\mbox{[}1\mbox{]}, etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Attempt status. This is not implemented yet; it always returns 0. 
+\end{DoxyReturn}
 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\end{DoxyCompactItemize}
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

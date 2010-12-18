@@ -47,16 +47,26 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of a 4-phase unipolar stepper motor device.  <a href="classshift_step_motor.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html">shiftSwitchBlock</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A block of plain switches.  <a href="classshift_switch_block.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_board.html">shiftBoard</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for individual boards with <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a>.  <a href="classshift_board.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_sixteen.html">shiftSixteen</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of shiftBoard for a sixteen channel high current Arduino shield.  <a href="classshift_sixteen.html#_details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <a class="el" href="classshift_board.html" title="Abstract base class for individual boards with shiftDevice.">shiftBoard</a> for a sixteen channel high current Arduino shield.  <a href="classshift_sixteen.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_six.html">shiftSix</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of shiftBoard for a six channel high current Arduino shield.  <a href="classshift_six.html#_details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <a class="el" href="classshift_board.html" title="Abstract base class for individual boards with shiftDevice.">shiftBoard</a> for a six channel high current Arduino shield.  <a href="classshift_six.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_board_direct.html">shiftBoardDirect</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for individual boards, without <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a> objects.  <a href="classshift_board_direct.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_sixteen_direct.html">shiftSixteenDirect</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <a class="el" href="classshift_board_direct.html" title="Abstract base class for individual boards, without shiftDevice objects.">shiftBoardDirect</a> for a sixteen channel high current Arduino shield.  <a href="classshift_sixteen_direct.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_six_direct.html">shiftSixDirect</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of <a class="el" href="classshift_board_direct.html" title="Abstract base class for individual boards, without shiftDevice objects.">shiftBoardDirect</a> for a six channel high current board.  <a href="classshift_six_direct.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html">shiftChain</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to represent a daisy chain of boards.  <a href="classshift_chain.html#_details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#ab149d3424d55eca75af6d56f17928cbc">__channelsPerSwitchBlock__</a>&#160;&#160;&#160;4</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device.  <a href="#ab149d3424d55eca75af6d56f17928cbc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#acd65c881d960ae17acb8c043d814d1ed">__channelsPerSwitchBlockDefault__</a>&#160;&#160;&#160;4</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Default number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device.  <a href="#acd65c881d960ae17acb8c043d814d1ed"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a0c275f5b5bbf9092eafd8f88f13efc63">__channelsPerSwitchBlockMax__</a>&#160;&#160;&#160;8</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Max number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device.  <a href="#a0c275f5b5bbf9092eafd8f88f13efc63"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a19e74e78535a1c218485566fcc76751e">__channelsPerMotor__</a>&#160;&#160;&#160;4</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels each stepper motor consumes.  <a href="#a19e74e78535a1c218485566fcc76751e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a2f33b141a2bcb279df22840ca9b96d5a">__maxMotorSpeed__</a>&#160;&#160;&#160;255</td></tr>
@@ -71,16 +81,20 @@ Defines</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets timer pre-scaler to 256.  <a href="#a5934e1bfb2663597ce181f4f00c1b1c4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a655d124c2726677785a75e0b24a4049a">__preScaler1024__</a>&#160;&#160;&#160;7</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets timer pre-scaler to 1024.  <a href="#a655d124c2726677785a75e0b24a4049a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#ae7701cd9aca25a5d2f3f9ac55dbc9f9f">__shiftSixteenBytes__</a>&#160;&#160;&#160;2</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bytes on a sixteen channel board.  <a href="#ae7701cd9aca25a5d2f3f9ac55dbc9f9f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a96af413ea9d141d8192568ae9425f363">__shiftSixteenFirst__</a>&#160;&#160;&#160;0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the lowest channel on a six channel board.  <a href="#a96af413ea9d141d8192568ae9425f363"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#ac5c0b389a81e12fc3319f49797c7024a">__shiftSixteenLast__</a>&#160;&#160;&#160;15</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the highest channel on a six channel board.  <a href="#ac5c0b389a81e12fc3319f49797c7024a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#aa603edb13f3837f481018aef04709dd5">__shiftSixBytes__</a>&#160;&#160;&#160;1</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bytes on a six channel board.  <a href="#aa603edb13f3837f481018aef04709dd5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a42e0c3a701a6b9c4e4564b150a9b2084">__shiftSixFirst__</a>&#160;&#160;&#160;1</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the lowest channel on a six channel board.  <a href="#a42e0c3a701a6b9c4e4564b150a9b2084"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a386cb6b80acfa854979ebb8ff4e02c96">__shiftSixLast__</a>&#160;&#160;&#160;6</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the highest channel on a six channel board.  <a href="#a386cb6b80acfa854979ebb8ff4e02c96"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a855068e47b65a3f02120bbb032040ad5">doBoardTick</a> (uint8_t chainSize, uint8_t firstByte, uint8_t *chainBytes)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle for per timer tick behavior of each board.  <a href="#a855068e47b65a3f02120bbb032040ad5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a7cf15ad074c5807b999bfcf490e2238a">getDevCount</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of objects associated with the board.  <a href="#a7cf15ad074c5807b999bfcf490e2238a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshift_device.html">shiftDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a0e47ab5a1c49478144a24342f34582d7">getDev</a> (uint8_t index)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to device at index.  <a href="#a0e47ab5a1c49478144a24342f34582d7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#ab60640025bb7557c57561a60bc97fc03">getBoardSize</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the board's datastream, in bytes.  <a href="#ab60640025bb7557c57561a60bc97fc03"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">__extension__ typedef int __guard&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#aa5aa60072f4063655d5283b6d7b7ab44">__attribute__</a> ((mode(__DI__)))</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a239ddd7f6e7ee1b05b59b2e56d8afb40">__cxa_guard_acquire</a> (__guard *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#aab72c37f0b3e6fc38d293bd4f8dd61ed">__cxa_guard_release</a> (__guard *)</td></tr>
@@ -91,16 +105,6 @@ Variables</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Default step sequence for full stepping.  <a href="#a59ec2655d4308a5b786a148e24aeeeb2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a75822d85a113536a5092e7cdfbfef56e">default8StepSequence</a> [8] = {0x1,0x3,0x2,0x6,0x4,0xc,0x8,0x9}</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Default step sequence for half stepping.  <a href="#a75822d85a113536a5092e7cdfbfef56e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshift_switch_block.html">shiftSwitchBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a52940c9b9e23f33b4ca0e53639eef46c">byteCount</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for individual boards.  <a href="#a52940c9b9e23f33b4ca0e53639eef46c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a4d85c39e96b5085c3335a26c9c2d6676">firstChan</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">First active channel/byte/bit on the board.  <a href="#a4d85c39e96b5085c3335a26c9c2d6676"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#a715279ae477cd5bb0158402d0b685997">lastChan</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Last active channel/byte/bit on the board.  <a href="#a715279ae477cd5bb0158402d0b685997"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshift_device.html">shiftDevice</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#ae69cffa41bbed7173c4796af281252ce">devices</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An array of pointers to all of the objects associated with this board.  <a href="#ae69cffa41bbed7173c4796af281252ce"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shift_stepper_8h.html#adf507bdc7510cde5b562b4838bcb2a9f">devCount</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries in the device array.  <a href="#adf507bdc7510cde5b562b4838bcb2a9f"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a19e74e78535a1c218485566fcc76751e"></a><!-- doxytag: member="ShiftStepper.h::__channelsPerMotor__" ref="a19e74e78535a1c218485566fcc76751e" args="" -->
@@ -118,18 +122,33 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab149d3424d55eca75af6d56f17928cbc"></a><!-- doxytag: member="ShiftStepper.h::__channelsPerSwitchBlock__" ref="ab149d3424d55eca75af6d56f17928cbc" args="" -->
+<a class="anchor" id="acd65c881d960ae17acb8c043d814d1ed"></a><!-- doxytag: member="ShiftStepper.h::__channelsPerSwitchBlockDefault__" ref="acd65c881d960ae17acb8c043d814d1ed" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define __channelsPerSwitchBlock__&#160;&#160;&#160;4</td>
+          <td class="memname">#define __channelsPerSwitchBlockDefault__&#160;&#160;&#160;4</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device. </p>
+<p>Default number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0c275f5b5bbf9092eafd8f88f13efc63"></a><!-- doxytag: member="ShiftStepper.h::__channelsPerSwitchBlockMax__" ref="a0c275f5b5bbf9092eafd8f88f13efc63" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __channelsPerSwitchBlockMax__&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Max number of channels in each <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> device. </p>
 
 </div>
 </div>
@@ -223,6 +242,96 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa603edb13f3837f481018aef04709dd5"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixBytes__" ref="aa603edb13f3837f481018aef04709dd5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixBytes__&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The number of bytes on a six channel board. </p>
+
+</div>
+</div>
+<a class="anchor" id="a42e0c3a701a6b9c4e4564b150a9b2084"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixFirst__" ref="a42e0c3a701a6b9c4e4564b150a9b2084" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixFirst__&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The index of the lowest channel on a six channel board. </p>
+
+</div>
+</div>
+<a class="anchor" id="a386cb6b80acfa854979ebb8ff4e02c96"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixLast__" ref="a386cb6b80acfa854979ebb8ff4e02c96" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixLast__&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The index of the highest channel on a six channel board. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae7701cd9aca25a5d2f3f9ac55dbc9f9f"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixteenBytes__" ref="ae7701cd9aca25a5d2f3f9ac55dbc9f9f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixteenBytes__&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The number of bytes on a sixteen channel board. </p>
+
+</div>
+</div>
+<a class="anchor" id="a96af413ea9d141d8192568ae9425f363"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixteenFirst__" ref="a96af413ea9d141d8192568ae9425f363" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixteenFirst__&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The index of the lowest channel on a six channel board. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac5c0b389a81e12fc3319f49797c7024a"></a><!-- doxytag: member="ShiftStepper.h::__shiftSixteenLast__" ref="ac5c0b389a81e12fc3319f49797c7024a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __shiftSixteenLast__&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The index of the highest channel on a six channel board. </p>
+
+</div>
+</div>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa5aa60072f4063655d5283b6d7b7ab44"></a><!-- doxytag: member="ShiftStepper.h::__attribute__" ref="aa5aa60072f4063655d5283b6d7b7ab44" args="((mode(__DI__)))" -->
 <div class="memitem">
@@ -238,6 +347,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>This is some strange linker food required to make it all work.</p>
+<p>See <a href="http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870">http://www.avrfreaks.net/index.php?name=PNphpBB2&amp;file=viewtopic&amp;p=410870</a> </p>
 
 </div>
 </div>
@@ -255,6 +366,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>This is some strange linker food required to make it all work.</p>
+<p>See <a href="http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870">http://www.avrfreaks.net/index.php?name=PNphpBB2&amp;file=viewtopic&amp;p=410870</a> </p>
 
 </div>
 </div>
@@ -266,12 +379,14 @@ Variables</h2></td></tr>
           <td class="memname">int __cxa_guard_acquire </td>
           <td>(</td>
           <td class="paramtype">__guard *&#160;</td>
-          <td class="paramname">&#160;)</td>
+          <td class="paramname"> <em>g</em>&#160;)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>This is some strange linker food required to make it all work.</p>
+<p>See <a href="http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870">http://www.avrfreaks.net/index.php?name=PNphpBB2&amp;file=viewtopic&amp;p=410870</a> </p>
 
 </div>
 </div>
@@ -283,134 +398,18 @@ Variables</h2></td></tr>
           <td class="memname">void __cxa_guard_release </td>
           <td>(</td>
           <td class="paramtype">__guard *&#160;</td>
-          <td class="paramname">&#160;)</td>
+          <td class="paramname"> <em>g</em>&#160;)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a855068e47b65a3f02120bbb032040ad5"></a><!-- doxytag: member="ShiftStepper.h::doBoardTick" ref="a855068e47b65a3f02120bbb032040ad5" args="(uint8_t chainSize, uint8_t firstByte, uint8_t *chainBytes)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void doBoardTick </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"> <em>chainSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"> <em>firstByte</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"> <em>chainBytes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Handle for per timer tick behavior of each board. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab60640025bb7557c57561a60bc97fc03"></a><!-- doxytag: member="ShiftStepper.h::getBoardSize" ref="ab60640025bb7557c57561a60bc97fc03" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t shiftBoard::getBoardSize </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname">&#160;)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the size of the board's datastream, in bytes. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The number of bytes of shift register on this board </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a0e47ab5a1c49478144a24342f34582d7"></a><!-- doxytag: member="ShiftStepper.h::getDev" ref="a0e47ab5a1c49478144a24342f34582d7" args="(uint8_t index)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classshift_device.html">shiftDevice</a> * shiftBoard::getDev </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"> <em>index</em>&#160;)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get pointer to device at index. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The index of the desired device, relative to the board </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the device at index </dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>class <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a7cf15ad074c5807b999bfcf490e2238a"></a><!-- doxytag: member="ShiftStepper.h::getDevCount" ref="a7cf15ad074c5807b999bfcf490e2238a" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t shiftBoard::getDevCount </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname">&#160;)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the number of objects associated with the board. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The number of devices associated with this board </dd></dl>
+<p>This is some strange linker food required to make it all work.</p>
+<p>See <a href="http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870">http://www.avrfreaks.net/index.php?name=PNphpBB2&amp;file=viewtopic&amp;p=410870</a> </p>
 
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a52940c9b9e23f33b4ca0e53639eef46c"></a><!-- doxytag: member="ShiftStepper.h::byteCount" ref="a52940c9b9e23f33b4ca0e53639eef46c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"> <a class="el" href="classshift_switch_block.html">shiftSwitchBlock</a> <a class="el" href="_shift_stepper_8h.html#a52940c9b9e23f33b4ca0e53639eef46c">byteCount</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Abstract base class for individual boards. </p>
-<p>Number of bytes of shift register on the board </p>
-
-</div>
-</div>
 <a class="anchor" id="a59ec2655d4308a5b786a148e24aeeeb2"></a><!-- doxytag: member="ShiftStepper.h::default4StepSequence" ref="a59ec2655d4308a5b786a148e24aeeeb2" args="[4]" -->
 <div class="memitem">
 <div class="memproto">
@@ -423,6 +422,7 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Default step sequence for full stepping. </p>
+<p>See <a href="http://www.cs.uiowa.edu/~jones/step/types.html#unipolar">http://www.cs.uiowa.edu/~jones/step/types.html#unipolar</a> for more details </p>
 
 </div>
 </div>
@@ -438,71 +438,12 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Default step sequence for half stepping. </p>
-
-</div>
-</div>
-<a class="anchor" id="adf507bdc7510cde5b562b4838bcb2a9f"></a><!-- doxytag: member="ShiftStepper.h::devCount" ref="adf507bdc7510cde5b562b4838bcb2a9f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t <a class="el" href="_shift_stepper_8h.html#adf507bdc7510cde5b562b4838bcb2a9f">devCount</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Number of entries in the device array. </p>
-
-</div>
-</div>
-<a class="anchor" id="ae69cffa41bbed7173c4796af281252ce"></a><!-- doxytag: member="ShiftStepper.h::devices" ref="ae69cffa41bbed7173c4796af281252ce" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classshift_device.html">shiftDevice</a>** <a class="el" href="_shift_stepper_8h.html#ae69cffa41bbed7173c4796af281252ce">devices</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>An array of pointers to all of the objects associated with this board. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4d85c39e96b5085c3335a26c9c2d6676"></a><!-- doxytag: member="ShiftStepper.h::firstChan" ref="a4d85c39e96b5085c3335a26c9c2d6676" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t <a class="el" href="_shift_stepper_8h.html#a4d85c39e96b5085c3335a26c9c2d6676">firstChan</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>First active channel/byte/bit on the board. </p>
-
-</div>
-</div>
-<a class="anchor" id="a715279ae477cd5bb0158402d0b685997"></a><!-- doxytag: member="ShiftStepper.h::lastChan" ref="a715279ae477cd5bb0158402d0b685997" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t <a class="el" href="_shift_stepper_8h.html#a715279ae477cd5bb0158402d0b685997">lastChan</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Last active channel/byte/bit on the board. </p>
+<p>See <a href="http://www.cs.uiowa.edu/~jones/step/types.html#unipolar">http://www.cs.uiowa.edu/~jones/step/types.html#unipolar</a> for more details </p>
 
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:09 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

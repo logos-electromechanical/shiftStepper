@@ -51,7 +51,10 @@ Inheritance diagram for shiftSwitchBlock:<!-- endSectionHeader --></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html#a455f9d6bb935de28027746d01a14814c">shiftStepMotor</a> (const uint8_t *channels)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html#acb483c64b961341ff6065b25ea2c4368">shiftSwitchBlock</a> (uint8_t *<a class="el" href="classshift_device.html#ac63a0543346c357134fd207a47976bab">channels</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new shiftSwichBlock object, with the default number of channels.  <a href="#acb483c64b961341ff6065b25ea2c4368"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html#ad6e23569570f9f6c37e7dc6e0b360b73">shiftSwitchBlock</a> (uint8_t <a class="el" href="classshift_device.html#a8eed8391ef608036d0f55f42348c0e41">chanCount</a>, uint8_t *<a class="el" href="classshift_device.html#ac63a0543346c357134fd207a47976bab">channels</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> object, with a variable number of channels.  <a href="#ad6e23569570f9f6c37e7dc6e0b360b73"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html#abc0f22095833ef9f9d84ae8b29934357">setSwitches</a> (uint8_t positions)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set switch positions.  <a href="#abc0f22095833ef9f9d84ae8b29934357"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_switch_block.html#a292a158fc742c52f2227728c024e9e70">getSwitches</a> (void)</td></tr>
@@ -61,6 +64,69 @@ Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A block of plain switches. </p>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acb483c64b961341ff6065b25ea2c4368"></a><!-- doxytag: member="shiftSwitchBlock::shiftSwitchBlock" ref="acb483c64b961341ff6065b25ea2c4368" args="(uint8_t *channels)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">shiftSwitchBlock::shiftSwitchBlock </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"> <em>chans</em>&#160;)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new shiftSwichBlock object, with the default number of channels. </p>
+<p>The default number of channels is set by __channelsPerSwitchBlockDefault__, defined in <a class="el" href="_shift_stepper_8h.html">shiftStepper.h</a>. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*channels</td><td>The array of channel numbers. This must have at least __channelsPerSwitchBlockDefault__ entries. It must be declared static or at global scope, or otherwise permanently allocated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad6e23569570f9f6c37e7dc6e0b360b73"></a><!-- doxytag: member="shiftSwitchBlock::shiftSwitchBlock" ref="ad6e23569570f9f6c37e7dc6e0b360b73" args="(uint8_t chanCount, uint8_t *channels)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">shiftSwitchBlock::shiftSwitchBlock </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"> <em>chanCnt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"> <em>chans</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="classshift_switch_block.html" title="A block of plain switches.">shiftSwitchBlock</a> object, with a variable number of channels. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chanCount</td><td>The number of channels that this device controls. </td></tr>
+    <tr><td class="paramname">*channels</td><td>The array of channel numbers. This must have at least chanCount entries. It must be declared static or at global scope, or otherwise permanently allocated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab6bbc5883fc7d966103df29d40ae012e"></a><!-- doxytag: member="shiftSwitchBlock::doDevTick" ref="ab6bbc5883fc7d966103df29d40ae012e" args="(uint8_t bytesPerBoard, uint8_t *boardBytes)" -->
 <div class="memitem">
@@ -88,6 +154,15 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Local implementation of per timer tick behavior. </p>
+<p>This function manages the per-tick behavior of a block of switches. It is expected to be called from the doBoardTick() function of the board that contains this device.</p>
+<p>This function writes the switches specified in the channels array with the states specified in the bit string written with <a class="el" href="classshift_switch_block.html#abc0f22095833ef9f9d84ae8b29934357" title="Set switch positions.">setSwitches()</a>.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytesPerBoard</td><td>This tells the function how many bytes of shift register are in the output board.</td></tr>
+    <tr><td class="paramname">*boardBytes</td><td>This is a pointer to the array of bytes that the doBoardTick() function this is called from uses to write to the array of bytes that is then shifted out to the boards themselves. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classshift_device.html#ab67731aedf33aad1b8c6dcbdbd01ecff">shiftDevice</a>.</p>
 
@@ -109,6 +184,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Get switch positions. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The bit string representing the current switch positions </dd></dl>
 
 </div>
 </div>
@@ -128,31 +204,22 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Set switch positions. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">positions</td><td>This is a bit string representing the position of the switches The LSB controls channels[0], the next controls channels[1], etc. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Attempt status. This is not implemented yet; it always returns 0. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a455f9d6bb935de28027746d01a14814c"></a><!-- doxytag: member="shiftSwitchBlock::shiftStepMotor" ref="a455f9d6bb935de28027746d01a14814c" args="(const uint8_t *channels)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">shiftSwitchBlock::shiftStepMotor </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"> <em>channels</em>&#160;)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8h_source.html">ShiftStepper.h</a></li>
+<li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:10 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

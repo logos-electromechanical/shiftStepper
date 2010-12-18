@@ -1,0 +1,24 @@
+(c) Logos Electromechanical LLC 2010
+Licensed under CC-BY-SA 3.0 
+
+This library is intended to drive Logos Electromechanical shift register boards
+
+This library is free software; you can redistribute it and/or modify it under the terms 
+of the Creative Commons By-Attribution Share-Alike 3.0 Unported license.
+
+This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+
+This library is written for the line of shift register controlled output boards produced 
+by Logos Electromechanical, LLC. It is intended to be flexible enough to support all of 
+the shift register interface boards current in production and planned for the future.
+
+See INSTALL for installation instructions
+
+v0.02a Release Notes
+
+- Added shiftSix board class to support six channel board
+- Added shiftSwitchBlock device class to control from one to eight channels individually
+- Added shiftSixteenDirect and shiftSixDirect classes to control board output directly
+  without the need for shiftDevice classes.
+- Added a ton of documentation

@@ -14,17 +14,27 @@ class \hyperlink{classshift_step_motor}{shiftStepMotor}
 \begin{DoxyCompactList}\small\item\em Implementation of a 4-\/phase unipolar stepper motor device. \item\end{DoxyCompactList}\item 
 class \hyperlink{classshift_switch_block}{shiftSwitchBlock}
 \begin{DoxyCompactList}\small\item\em A block of plain switches. \item\end{DoxyCompactList}\item 
+class \hyperlink{classshift_board}{shiftBoard}
+\begin{DoxyCompactList}\small\item\em Abstract base class for individual boards with \hyperlink{classshift_device}{shiftDevice}. \item\end{DoxyCompactList}\item 
 class \hyperlink{classshift_sixteen}{shiftSixteen}
-\begin{DoxyCompactList}\small\item\em Implementation of shiftBoard for a sixteen channel high current Arduino shield. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{classshift_board}{shiftBoard} for a sixteen channel high current Arduino shield. \item\end{DoxyCompactList}\item 
 class \hyperlink{classshift_six}{shiftSix}
-\begin{DoxyCompactList}\small\item\em Implementation of shiftBoard for a six channel high current Arduino shield. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{classshift_board}{shiftBoard} for a six channel high current Arduino shield. \item\end{DoxyCompactList}\item 
+class \hyperlink{classshift_board_direct}{shiftBoardDirect}
+\begin{DoxyCompactList}\small\item\em Abstract base class for individual boards, without \hyperlink{classshift_device}{shiftDevice} objects. \item\end{DoxyCompactList}\item 
+class \hyperlink{classshift_sixteen_direct}{shiftSixteenDirect}
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{classshift_board_direct}{shiftBoardDirect} for a sixteen channel high current Arduino shield. \item\end{DoxyCompactList}\item 
+class \hyperlink{classshift_six_direct}{shiftSixDirect}
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{classshift_board_direct}{shiftBoardDirect} for a six channel high current board. \item\end{DoxyCompactList}\item 
 class \hyperlink{classshift_chain}{shiftChain}
 \begin{DoxyCompactList}\small\item\em Class to represent a daisy chain of boards. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Defines}
 \begin{DoxyCompactItemize}
 \item 
-\#define \hyperlink{_shift_stepper_8h_ab149d3424d55eca75af6d56f17928cbc}{\_\-\_\-channelsPerSwitchBlock\_\-\_\-}~4
-\begin{DoxyCompactList}\small\item\em Number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_acd65c881d960ae17acb8c043d814d1ed}{\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-}~4
+\begin{DoxyCompactList}\small\item\em Default number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_a0c275f5b5bbf9092eafd8f88f13efc63}{\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-}~8
+\begin{DoxyCompactList}\small\item\em Max number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. \item\end{DoxyCompactList}\item 
 \#define \hyperlink{_shift_stepper_8h_a19e74e78535a1c218485566fcc76751e}{\_\-\_\-channelsPerMotor\_\-\_\-}~4
 \begin{DoxyCompactList}\small\item\em Number of channels each stepper motor consumes. \item\end{DoxyCompactList}\item 
 \#define \hyperlink{_shift_stepper_8h_a2f33b141a2bcb279df22840ca9b96d5a}{\_\-\_\-maxMotorSpeed\_\-\_\-}~255
@@ -38,18 +48,22 @@ class \hyperlink{classshift_chain}{shiftChain}
 \#define \hyperlink{_shift_stepper_8h_a5934e1bfb2663597ce181f4f00c1b1c4}{\_\-\_\-preScaler256\_\-\_\-}~6
 \begin{DoxyCompactList}\small\item\em Sets timer pre-\/scaler to 256. \item\end{DoxyCompactList}\item 
 \#define \hyperlink{_shift_stepper_8h_a655d124c2726677785a75e0b24a4049a}{\_\-\_\-preScaler1024\_\-\_\-}~7
-\begin{DoxyCompactList}\small\item\em Sets timer pre-\/scaler to 1024. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sets timer pre-\/scaler to 1024. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}{\_\-\_\-shiftSixteenBytes\_\-\_\-}~2
+\begin{DoxyCompactList}\small\item\em The number of bytes on a sixteen channel board. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_a96af413ea9d141d8192568ae9425f363}{\_\-\_\-shiftSixteenFirst\_\-\_\-}~0
+\begin{DoxyCompactList}\small\item\em The index of the lowest channel on a six channel board. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_ac5c0b389a81e12fc3319f49797c7024a}{\_\-\_\-shiftSixteenLast\_\-\_\-}~15
+\begin{DoxyCompactList}\small\item\em The index of the highest channel on a six channel board. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_aa603edb13f3837f481018aef04709dd5}{\_\-\_\-shiftSixBytes\_\-\_\-}~1
+\begin{DoxyCompactList}\small\item\em The number of bytes on a six channel board. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_a42e0c3a701a6b9c4e4564b150a9b2084}{\_\-\_\-shiftSixFirst\_\-\_\-}~1
+\begin{DoxyCompactList}\small\item\em The index of the lowest channel on a six channel board. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{_shift_stepper_8h_a386cb6b80acfa854979ebb8ff4e02c96}{\_\-\_\-shiftSixLast\_\-\_\-}~6
+\begin{DoxyCompactList}\small\item\em The index of the highest channel on a six channel board. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \hyperlink{_shift_stepper_8h_a855068e47b65a3f02120bbb032040ad5}{doBoardTick} (uint8\_\-t chainSize, uint8\_\-t firstByte, uint8\_\-t $\ast$chainBytes)
-\begin{DoxyCompactList}\small\item\em Handle for per timer tick behavior of each board. \item\end{DoxyCompactList}\item 
-uint8\_\-t \hyperlink{_shift_stepper_8h_a7cf15ad074c5807b999bfcf490e2238a}{getDevCount} (void)
-\begin{DoxyCompactList}\small\item\em Get the number of objects associated with the board. \item\end{DoxyCompactList}\item 
-\hyperlink{classshift_device}{shiftDevice} $\ast$ \hyperlink{_shift_stepper_8h_a0e47ab5a1c49478144a24342f34582d7}{getDev} (uint8\_\-t index)
-\begin{DoxyCompactList}\small\item\em Get pointer to device at index. \item\end{DoxyCompactList}\item 
-uint8\_\-t \hyperlink{_shift_stepper_8h_ab60640025bb7557c57561a60bc97fc03}{getBoardSize} (void)
-\begin{DoxyCompactList}\small\item\em Get the size of the board's datastream, in bytes. \item\end{DoxyCompactList}\item 
 \_\-\_\-extension\_\-\_\- typedef int \_\-\_\-guard \hyperlink{_shift_stepper_8h_aa5aa60072f4063655d5283b6d7b7ab44}{\_\-\_\-attribute\_\-\_\-} ((mode(\_\-\_\-DI\_\-\_\-)))
 \item 
 int \hyperlink{_shift_stepper_8h_a239ddd7f6e7ee1b05b59b2e56d8afb40}{\_\-\_\-cxa\_\-guard\_\-acquire} (\_\-\_\-guard $\ast$)
@@ -64,17 +78,7 @@ void \hyperlink{_shift_stepper_8h_a357afb2dc20a652447f3a529dbda60e4}{\_\-\_\-cxa
 static const uint8\_\-t \hyperlink{_shift_stepper_8h_a59ec2655d4308a5b786a148e24aeeeb2}{default4StepSequence} \mbox{[}4\mbox{]} = \{0x1, 0x2, 0x4, 0x8\}
 \begin{DoxyCompactList}\small\item\em Default step sequence for full stepping. \item\end{DoxyCompactList}\item 
 static const uint8\_\-t \hyperlink{_shift_stepper_8h_a75822d85a113536a5092e7cdfbfef56e}{default8StepSequence} \mbox{[}8\mbox{]} = \{0x1,0x3,0x2,0x6,0x4,0xc,0x8,0x9\}
-\begin{DoxyCompactList}\small\item\em Default step sequence for half stepping. \item\end{DoxyCompactList}\item 
-\hyperlink{classshift_switch_block}{shiftSwitchBlock} \hyperlink{_shift_stepper_8h_a52940c9b9e23f33b4ca0e53639eef46c}{byteCount}
-\begin{DoxyCompactList}\small\item\em Abstract base class for individual boards. \item\end{DoxyCompactList}\item 
-uint8\_\-t \hyperlink{_shift_stepper_8h_a4d85c39e96b5085c3335a26c9c2d6676}{firstChan}
-\begin{DoxyCompactList}\small\item\em First active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
-uint8\_\-t \hyperlink{_shift_stepper_8h_a715279ae477cd5bb0158402d0b685997}{lastChan}
-\begin{DoxyCompactList}\small\item\em Last active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
-\hyperlink{classshift_device}{shiftDevice} $\ast$$\ast$ \hyperlink{_shift_stepper_8h_ae69cffa41bbed7173c4796af281252ce}{devices}
-\begin{DoxyCompactList}\small\item\em An array of pointers to all of the objects associated with this board. \item\end{DoxyCompactList}\item 
-uint8\_\-t \hyperlink{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}{devCount}
-\begin{DoxyCompactList}\small\item\em Number of entries in the device array. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Default step sequence for half stepping. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Define Documentation}
@@ -87,14 +91,23 @@ uint8\_\-t \hyperlink{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}{devCo
 
 Number of channels each stepper motor consumes. 
 
-\hypertarget{_shift_stepper_8h_ab149d3424d55eca75af6d56f17928cbc}{
-\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-channelsPerSwitchBlock\_\-\_\-@{\_\-\_\-channelsPerSwitchBlock\_\-\_\-}}
-\index{\_\-\_\-channelsPerSwitchBlock\_\-\_\-@{\_\-\_\-channelsPerSwitchBlock\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{\_\-\_\-channelsPerSwitchBlock\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-channelsPerSwitchBlock\_\-\_\-~4}}
-\label{_shift_stepper_8h_ab149d3424d55eca75af6d56f17928cbc}
+\hypertarget{_shift_stepper_8h_acd65c881d960ae17acb8c043d814d1ed}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-@{\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-}}
+\index{\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-@{\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-channelsPerSwitchBlockDefault\_\-\_\-~4}}
+\label{_shift_stepper_8h_acd65c881d960ae17acb8c043d814d1ed}
 
 
-Number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. 
+Default number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. 
+
+\hypertarget{_shift_stepper_8h_a0c275f5b5bbf9092eafd8f88f13efc63}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-@{\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-}}
+\index{\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-@{\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-channelsPerSwitchBlockMax\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-channelsPerSwitchBlockMax\_\-\_\-~8}}
+\label{_shift_stepper_8h_a0c275f5b5bbf9092eafd8f88f13efc63}
+
+
+Max number of channels in each \hyperlink{classshift_switch_block}{shiftSwitchBlock} device. 
 
 \hypertarget{_shift_stepper_8h_a2f33b141a2bcb279df22840ca9b96d5a}{
 \index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-maxMotorSpeed\_\-\_\-@{\_\-\_\-maxMotorSpeed\_\-\_\-}}
@@ -150,6 +163,60 @@ Sets timer pre-\/scaler to 32.
 
 Sets timer pre-\/scaler to 64. 
 
+\hypertarget{_shift_stepper_8h_aa603edb13f3837f481018aef04709dd5}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixBytes\_\-\_\-@{\_\-\_\-shiftSixBytes\_\-\_\-}}
+\index{\_\-\_\-shiftSixBytes\_\-\_\-@{\_\-\_\-shiftSixBytes\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixBytes\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixBytes\_\-\_\-~1}}
+\label{_shift_stepper_8h_aa603edb13f3837f481018aef04709dd5}
+
+
+The number of bytes on a six channel board. 
+
+\hypertarget{_shift_stepper_8h_a42e0c3a701a6b9c4e4564b150a9b2084}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixFirst\_\-\_\-@{\_\-\_\-shiftSixFirst\_\-\_\-}}
+\index{\_\-\_\-shiftSixFirst\_\-\_\-@{\_\-\_\-shiftSixFirst\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixFirst\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixFirst\_\-\_\-~1}}
+\label{_shift_stepper_8h_a42e0c3a701a6b9c4e4564b150a9b2084}
+
+
+The index of the lowest channel on a six channel board. 
+
+\hypertarget{_shift_stepper_8h_a386cb6b80acfa854979ebb8ff4e02c96}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixLast\_\-\_\-@{\_\-\_\-shiftSixLast\_\-\_\-}}
+\index{\_\-\_\-shiftSixLast\_\-\_\-@{\_\-\_\-shiftSixLast\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixLast\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixLast\_\-\_\-~6}}
+\label{_shift_stepper_8h_a386cb6b80acfa854979ebb8ff4e02c96}
+
+
+The index of the highest channel on a six channel board. 
+
+\hypertarget{_shift_stepper_8h_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixteenBytes\_\-\_\-@{\_\-\_\-shiftSixteenBytes\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenBytes\_\-\_\-@{\_\-\_\-shiftSixteenBytes\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixteenBytes\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenBytes\_\-\_\-~2}}
+\label{_shift_stepper_8h_ae7701cd9aca25a5d2f3f9ac55dbc9f9f}
+
+
+The number of bytes on a sixteen channel board. 
+
+\hypertarget{_shift_stepper_8h_a96af413ea9d141d8192568ae9425f363}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixteenFirst\_\-\_\-@{\_\-\_\-shiftSixteenFirst\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenFirst\_\-\_\-@{\_\-\_\-shiftSixteenFirst\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixteenFirst\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenFirst\_\-\_\-~0}}
+\label{_shift_stepper_8h_a96af413ea9d141d8192568ae9425f363}
+
+
+The index of the lowest channel on a six channel board. 
+
+\hypertarget{_shift_stepper_8h_ac5c0b389a81e12fc3319f49797c7024a}{
+\index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-shiftSixteenLast\_\-\_\-@{\_\-\_\-shiftSixteenLast\_\-\_\-}}
+\index{\_\-\_\-shiftSixteenLast\_\-\_\-@{\_\-\_\-shiftSixteenLast\_\-\_\-}!ShiftStepper.h@{ShiftStepper.h}}
+\subsubsection[{\_\-\_\-shiftSixteenLast\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-shiftSixteenLast\_\-\_\-~15}}
+\label{_shift_stepper_8h_ac5c0b389a81e12fc3319f49797c7024a}
+
+
+The index of the highest channel on a six channel board. 
+
 
 
 \subsection{Function Documentation}
@@ -162,7 +229,9 @@ Sets timer pre-\/scaler to 64.
 \end{DoxyParamCaption}
 )}}
 \label{_shift_stepper_8h_aa5aa60072f4063655d5283b6d7b7ab44}
-\hypertarget{_shift_stepper_8h_a357afb2dc20a652447f3a529dbda60e4}{
+This is some strange linker food required to make it all work.
+
+See \href{http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870}{\tt http://www.avrfreaks.net/index.php?name=PNphpBB2\&file=viewtopic\&p=410870} \hypertarget{_shift_stepper_8h_a357afb2dc20a652447f3a529dbda60e4}{
 \index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-cxa\_\-guard\_\-abort@{\_\-\_\-cxa\_\-guard\_\-abort}}
 \index{\_\-\_\-cxa\_\-guard\_\-abort@{\_\-\_\-cxa\_\-guard\_\-abort}!ShiftStepper.h@{ShiftStepper.h}}
 \subsubsection[{\_\-\_\-cxa\_\-guard\_\-abort}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-cxa\_\-guard\_\-abort (
@@ -171,108 +240,34 @@ Sets timer pre-\/scaler to 64.
 \end{DoxyParamCaption}
 )}}
 \label{_shift_stepper_8h_a357afb2dc20a652447f3a529dbda60e4}
-\hypertarget{_shift_stepper_8h_a239ddd7f6e7ee1b05b59b2e56d8afb40}{
+This is some strange linker food required to make it all work.
+
+See \href{http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870}{\tt http://www.avrfreaks.net/index.php?name=PNphpBB2\&file=viewtopic\&p=410870} \hypertarget{_shift_stepper_8h_a239ddd7f6e7ee1b05b59b2e56d8afb40}{
 \index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-cxa\_\-guard\_\-acquire@{\_\-\_\-cxa\_\-guard\_\-acquire}}
 \index{\_\-\_\-cxa\_\-guard\_\-acquire@{\_\-\_\-cxa\_\-guard\_\-acquire}!ShiftStepper.h@{ShiftStepper.h}}
 \subsubsection[{\_\-\_\-cxa\_\-guard\_\-acquire}]{\setlength{\rightskip}{0pt plus 5cm}int \_\-\_\-cxa\_\-guard\_\-acquire (
 \begin{DoxyParamCaption}
-\item[{\_\-\_\-guard $\ast$}]{}
+\item[{\_\-\_\-guard $\ast$}]{ g}
 \end{DoxyParamCaption}
 )}}
 \label{_shift_stepper_8h_a239ddd7f6e7ee1b05b59b2e56d8afb40}
-\hypertarget{_shift_stepper_8h_aab72c37f0b3e6fc38d293bd4f8dd61ed}{
+This is some strange linker food required to make it all work.
+
+See \href{http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870}{\tt http://www.avrfreaks.net/index.php?name=PNphpBB2\&file=viewtopic\&p=410870} \hypertarget{_shift_stepper_8h_aab72c37f0b3e6fc38d293bd4f8dd61ed}{
 \index{ShiftStepper.h@{ShiftStepper.h}!\_\-\_\-cxa\_\-guard\_\-release@{\_\-\_\-cxa\_\-guard\_\-release}}
 \index{\_\-\_\-cxa\_\-guard\_\-release@{\_\-\_\-cxa\_\-guard\_\-release}!ShiftStepper.h@{ShiftStepper.h}}
 \subsubsection[{\_\-\_\-cxa\_\-guard\_\-release}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-cxa\_\-guard\_\-release (
 \begin{DoxyParamCaption}
-\item[{\_\-\_\-guard $\ast$}]{}
+\item[{\_\-\_\-guard $\ast$}]{ g}
 \end{DoxyParamCaption}
 )}}
 \label{_shift_stepper_8h_aab72c37f0b3e6fc38d293bd4f8dd61ed}
-\hypertarget{_shift_stepper_8h_a855068e47b65a3f02120bbb032040ad5}{
-\index{ShiftStepper.h@{ShiftStepper.h}!doBoardTick@{doBoardTick}}
-\index{doBoardTick@{doBoardTick}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{doBoardTick}]{\setlength{\rightskip}{0pt plus 5cm}virtual void doBoardTick (
-\begin{DoxyParamCaption}
-\item[{uint8\_\-t}]{ chainSize, }
-\item[{uint8\_\-t}]{ firstByte, }
-\item[{uint8\_\-t $\ast$}]{ chainBytes}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
-\label{_shift_stepper_8h_a855068e47b65a3f02120bbb032040ad5}
+This is some strange linker food required to make it all work.
 
-
-Handle for per timer tick behavior of each board. 
-
-\hypertarget{_shift_stepper_8h_ab60640025bb7557c57561a60bc97fc03}{
-\index{ShiftStepper.h@{ShiftStepper.h}!getBoardSize@{getBoardSize}}
-\index{getBoardSize@{getBoardSize}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{getBoardSize}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoard::getBoardSize (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}}
-\label{_shift_stepper_8h_ab60640025bb7557c57561a60bc97fc03}
-
-
-Get the size of the board's datastream, in bytes. 
-
-\begin{DoxyReturn}{Returns}
-The number of bytes of shift register on this board 
-\end{DoxyReturn}
-\hypertarget{_shift_stepper_8h_a0e47ab5a1c49478144a24342f34582d7}{
-\index{ShiftStepper.h@{ShiftStepper.h}!getDev@{getDev}}
-\index{getDev@{getDev}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{getDev}]{\setlength{\rightskip}{0pt plus 5cm}{\bf shiftDevice} $\ast$ shiftBoard::getDev (
-\begin{DoxyParamCaption}
-\item[{uint8\_\-t}]{ index}
-\end{DoxyParamCaption}
-)}}
-\label{_shift_stepper_8h_a0e47ab5a1c49478144a24342f34582d7}
-
-
-Get pointer to device at index. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em index} & The index of the desired device, relative to the board \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A pointer to the device at index 
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-class \hyperlink{classshift_device}{shiftDevice} 
-\end{DoxySeeAlso}
-\hypertarget{_shift_stepper_8h_a7cf15ad074c5807b999bfcf490e2238a}{
-\index{ShiftStepper.h@{ShiftStepper.h}!getDevCount@{getDevCount}}
-\index{getDevCount@{getDevCount}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{getDevCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoard::getDevCount (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}}
-\label{_shift_stepper_8h_a7cf15ad074c5807b999bfcf490e2238a}
-
-
-Get the number of objects associated with the board. 
-
-\begin{DoxyReturn}{Returns}
-The number of devices associated with this board 
-\end{DoxyReturn}
-
+See \href{http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870}{\tt http://www.avrfreaks.net/index.php?name=PNphpBB2\&file=viewtopic\&p=410870} 
 
 \subsection{Variable Documentation}
-\hypertarget{_shift_stepper_8h_a52940c9b9e23f33b4ca0e53639eef46c}{
-\index{ShiftStepper.h@{ShiftStepper.h}!byteCount@{byteCount}}
-\index{byteCount@{byteCount}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{byteCount}]{\setlength{\rightskip}{0pt plus 5cm} {\bf shiftSwitchBlock} {\bf byteCount}}}
-\label{_shift_stepper_8h_a52940c9b9e23f33b4ca0e53639eef46c}
-
-
-Abstract base class for individual boards. 
-
-Number of bytes of shift register on the board \hypertarget{_shift_stepper_8h_a59ec2655d4308a5b786a148e24aeeeb2}{
+\hypertarget{_shift_stepper_8h_a59ec2655d4308a5b786a148e24aeeeb2}{
 \index{ShiftStepper.h@{ShiftStepper.h}!default4StepSequence@{default4StepSequence}}
 \index{default4StepSequence@{default4StepSequence}!ShiftStepper.h@{ShiftStepper.h}}
 \subsubsection[{default4StepSequence}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\_\-t {\bf default4StepSequence}\mbox{[}4\mbox{]} = \{0x1, 0x2, 0x4, 0x8\}\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
@@ -281,7 +276,7 @@ Number of bytes of shift register on the board \hypertarget{_shift_stepper_8h_a5
 
 Default step sequence for full stepping. 
 
-\hypertarget{_shift_stepper_8h_a75822d85a113536a5092e7cdfbfef56e}{
+See \href{http://www.cs.uiowa.edu/~jones/step/types.html#unipolar}{\tt http://www.cs.uiowa.edu/$\sim$jones/step/types.html\#unipolar} for more details \hypertarget{_shift_stepper_8h_a75822d85a113536a5092e7cdfbfef56e}{
 \index{ShiftStepper.h@{ShiftStepper.h}!default8StepSequence@{default8StepSequence}}
 \index{default8StepSequence@{default8StepSequence}!ShiftStepper.h@{ShiftStepper.h}}
 \subsubsection[{default8StepSequence}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\_\-t {\bf default8StepSequence}\mbox{[}8\mbox{]} = \{0x1,0x3,0x2,0x6,0x4,0xc,0x8,0x9\}\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
@@ -290,39 +285,4 @@ Default step sequence for full stepping.
 
 Default step sequence for half stepping. 
 
-\hypertarget{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}{
-\index{ShiftStepper.h@{ShiftStepper.h}!devCount@{devCount}}
-\index{devCount@{devCount}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{devCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf devCount}}}
-\label{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}
-
-
-Number of entries in the device array. 
-
-\hypertarget{_shift_stepper_8h_ae69cffa41bbed7173c4796af281252ce}{
-\index{ShiftStepper.h@{ShiftStepper.h}!devices@{devices}}
-\index{devices@{devices}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{devices}]{\setlength{\rightskip}{0pt plus 5cm}{\bf shiftDevice}$\ast$$\ast$ {\bf devices}}}
-\label{_shift_stepper_8h_ae69cffa41bbed7173c4796af281252ce}
-
-
-An array of pointers to all of the objects associated with this board. 
-
-\hypertarget{_shift_stepper_8h_a4d85c39e96b5085c3335a26c9c2d6676}{
-\index{ShiftStepper.h@{ShiftStepper.h}!firstChan@{firstChan}}
-\index{firstChan@{firstChan}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{firstChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf firstChan}}}
-\label{_shift_stepper_8h_a4d85c39e96b5085c3335a26c9c2d6676}
-
-
-First active channel/byte/bit on the board. 
-
-\hypertarget{_shift_stepper_8h_a715279ae477cd5bb0158402d0b685997}{
-\index{ShiftStepper.h@{ShiftStepper.h}!lastChan@{lastChan}}
-\index{lastChan@{lastChan}!ShiftStepper.h@{ShiftStepper.h}}
-\subsubsection[{lastChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf lastChan}}}
-\label{_shift_stepper_8h_a715279ae477cd5bb0158402d0b685997}
-
-
-Last active channel/byte/bit on the board. 
-
+See \href{http://www.cs.uiowa.edu/~jones/step/types.html#unipolar}{\tt http://www.cs.uiowa.edu/$\sim$jones/step/types.html\#unipolar} for more details 

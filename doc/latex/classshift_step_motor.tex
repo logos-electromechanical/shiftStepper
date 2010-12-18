@@ -63,7 +63,7 @@ Creates a \hyperlink{classshift_step_motor}{shiftStepMotor} object.
 \hline
 {\em $\ast$sequence} & The array of switch positions for each step in the sequence. Bit 0 of each element of this array controls channels\mbox{[}0\mbox{]}, bit 1 controls channels\mbox{[}1\mbox{]}, etc. This array must have a number of elements equal to seqSteps. This array must be allocated either statically or at global scope. \\
 \hline
-{\em $\ast$channels} & The array of channel numbers used by the motor. Must have four elements. The order of the channels in this array determines how the members of sequence\mbox{[}\mbox{]} are interpreted. This array must be allocated either statically or at global scope. \\
+{\em $\ast$channels} & The array of channel numbers used by the motor. Must have four elements. The order of the channels in this array determines how the members of sequence\mbox{[}\mbox{]} are interpreted. This array need not be permanently allocated. \\
 \hline
 \end{DoxyParams}
 
@@ -83,11 +83,22 @@ Creates a \hyperlink{classshift_step_motor}{shiftStepMotor} object.
 
 Local implementation of per timer tick behavior. 
 
-This function manages the per-\/tick behavior of a stepper motor device. It performs the following tasks:
+This function manages the per-\/tick behavior of a stepper motor device. It is expected to be called from the doBoardTick() function of the board that contains this device.
+
+It performs the following tasks:
 \begin{DoxyItemize}
 \item Checks whether or not it's time to make a step, based on the values of stepSpeed, lastStep, and stepsToGo
-\item Writes the current switch state to the bits corresponding to the output channels in the boardBytes\mbox{[}\mbox{]} array 
+\item Writes the current switch state to the bits corresponding to the output channels in the boardBytes\mbox{[}\mbox{]} array
 \end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytesPerBoard} & This tells the function how many bytes of shift register are in the output board.\\
+\hline
+{\em $\ast$boardBytes} & This is a pointer to the array of bytes that the doBoardTick() function this is called from uses to write to the array of bytes that is then shifted out to the boards themselves. \\
+\hline
+\end{DoxyParams}
+
 
 Reimplemented from \hyperlink{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{shiftDevice}.
 

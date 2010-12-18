@@ -107,7 +107,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">seqSteps</td><td>The number of steps in the sequence of switch positions required to turn the motor. Typically 4 (full steps) or 8 (half steps). </td></tr>
     <tr><td class="paramname">*sequence</td><td>The array of switch positions for each step in the sequence. Bit 0 of each element of this array controls channels[0], bit 1 controls channels[1], etc. This array must have a number of elements equal to seqSteps. This array must be allocated either statically or at global scope. </td></tr>
-    <tr><td class="paramname">*channels</td><td>The array of channel numbers used by the motor. Must have four elements. The order of the channels in this array determines how the members of sequence[] are interpreted. This array must be allocated either statically or at global scope. </td></tr>
+    <tr><td class="paramname">*channels</td><td>The array of channel numbers used by the motor. Must have four elements. The order of the channels in this array determines how the members of sequence[] are interpreted. This array need not be permanently allocated. </td></tr>
   </table>
   </dd>
 </dl>
@@ -141,11 +141,19 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Local implementation of per timer tick behavior. </p>
-<p>This function manages the per-tick behavior of a stepper motor device. It performs the following tasks:</p>
+<p>This function manages the per-tick behavior of a stepper motor device. It is expected to be called from the doBoardTick() function of the board that contains this device.</p>
+<p>It performs the following tasks:</p>
 <ul>
 <li>Checks whether or not it's time to make a step, based on the values of stepSpeed, lastStep, and stepsToGo</li>
-<li>Writes the current switch state to the bits corresponding to the output channels in the boardBytes[] array </li>
+<li>Writes the current switch state to the bits corresponding to the output channels in the boardBytes[] array</li>
 </ul>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytesPerBoard</td><td>This tells the function how many bytes of shift register are in the output board.</td></tr>
+    <tr><td class="paramname">*boardBytes</td><td>This is a pointer to the array of bytes that the doBoardTick() function this is called from uses to write to the array of bytes that is then shifted out to the boards themselves. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classshift_device.html#ab67731aedf33aad1b8c6dcbdbd01ecff">shiftDevice</a>.</p>
 
@@ -322,7 +330,7 @@ Public Member Functions</h2></td></tr>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:10 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

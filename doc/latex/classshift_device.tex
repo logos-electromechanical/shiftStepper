@@ -36,7 +36,7 @@ uint8\_\-t \hyperlink{classshift_device_a8eed8391ef608036d0f55f42348c0e41}{chanC
 
 
 \subsection{Detailed Description}
-Abstract base class for creating devices such as motors that attach to a board. 
+Abstract base class for creating devices such as motors that attach to a board. A \hyperlink{classshift_device}{shiftDevice} object represents an object controlled by a shift register board. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classshift_device_ab67731aedf33aad1b8c6dcbdbd01ecff}{
@@ -53,7 +53,7 @@ Abstract base class for creating devices such as motors that attach to a board.
 
 Handle for the per timer tick behavior of each device. 
 
-This function is intended to be called from shiftBoard::doBoardTick(), which passes it the array of bytes that it expects it to write the data to be shifted out to. 
+This function is intended to be called from \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{shiftBoard::doBoardTick()}, which passes it the array of bytes that it expects it to write the data to be shifted out to. 
 \begin{DoxyParams}{Parameters}
 {\em bytesPerBoard} & is the number of outgoing bytes for the board this device is part of. \\
 \hline

@@ -32,23 +32,32 @@
 <h1>shiftSixteen Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="shiftSixteen" -->
-<p>Implementation of shiftBoard for a sixteen channel high current Arduino shield.  
+<!-- doxytag: class="shiftSixteen" --><!-- doxytag: inherits="shiftBoard" -->
+<p>Implementation of <a class="el" href="classshift_board.html" title="Abstract base class for individual boards with shiftDevice.">shiftBoard</a> for a sixteen channel high current Arduino shield.  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_shift_stepper_8h_source.html">ShiftStepper.h</a>&gt;</code></p>
+<!-- startSectionHeader --><div class="dynheader">
+Inheritance diagram for shiftSixteen:<!-- endSectionHeader --></div>
+<!-- startSectionSummary --><!-- endSectionSummary --><!-- startSectionContent --><div class="dyncontent">
+ <div class="center">
+  <img src="classshift_sixteen.png" usemap="#shiftSixteen_map" alt=""/>
+  <map id="shiftSixteen_map" name="shiftSixteen_map">
+<area href="classshift_board.html" alt="shiftBoard" shape="rect" coords="0,0,76,24"/>
+</map>
+ </div><!-- endSectionContent --></div>
 
 <p><a href="classshift_sixteen-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_sixteen.html#afb8981ea1869387ca6e5b4c2a28b8018">shiftSixteen</a> (uint8_t <a class="el" href="_shift_stepper_8h.html#adf507bdc7510cde5b562b4838bcb2a9f">devCount</a>, <a class="el" href="classshift_device.html">shiftDevice</a> **<a class="el" href="_shift_stepper_8h.html#ae69cffa41bbed7173c4796af281252ce">devices</a>)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a ShiftSixteen object.  <a href="#afb8981ea1869387ca6e5b4c2a28b8018"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_sixteen.html#afb8981ea1869387ca6e5b4c2a28b8018">shiftSixteen</a> (uint8_t <a class="el" href="classshift_board.html#ae7bba07850ced1219dcf67cab33de929">devCount</a>, <a class="el" href="classshift_device.html">shiftDevice</a> **<a class="el" href="classshift_board.html#a07a2549714f7064fa5e48ec63fdb5efb">devices</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a ShiftSixteen board object.  <a href="#afb8981ea1869387ca6e5b4c2a28b8018"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_sixteen.html#a28c2a73078d10abf6f779021fd8d2908">doBoardTick</a> (uint8_t chainSize, uint8_t firstByte, uint8_t *chainBytes)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Do a timer tick for a sixteen channel board.  <a href="#a28c2a73078d10abf6f779021fd8d2908"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Implementation of shiftBoard for a sixteen channel high current Arduino shield. </p>
+<p>Implementation of <a class="el" href="classshift_board.html" title="Abstract base class for individual boards with shiftDevice.">shiftBoard</a> for a sixteen channel high current Arduino shield. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afb8981ea1869387ca6e5b4c2a28b8018"></a><!-- doxytag: member="shiftSixteen::shiftSixteen" ref="afb8981ea1869387ca6e5b4c2a28b8018" args="(uint8_t devCount, shiftDevice **devices)" -->
 <div class="memitem">
@@ -75,18 +84,11 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Create a ShiftSixteen object. </p>
+<p>Create a ShiftSixteen board object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">uint8_t</td><td>devCount The number of individual devices attached to this board. </td></tr>
-    <tr><td class="paramname"><a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a></td><td>**devices </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">devCount</td><td>Number of devices </td></tr>
-    <tr><td class="paramname">devices</td><td>Array of pointers to device objects </td></tr>
+    <tr><td class="paramname">devCount</td><td>The number of individual devices attached to this board. </td></tr>
+    <tr><td class="paramname">**devices</td><td>An array of pointers to the device objects. This array and the objects it contains must be allocated either statically or at global scope. </td></tr>
   </table>
   </dd>
 </dl>
@@ -119,7 +121,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -128,12 +130,14 @@ Public Member Functions</h2></td></tr>
 <p>Do a timer tick for a sixteen channel board. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">chainSize</td><td>Total number of bytes in the chain </td></tr>
-    <tr><td class="paramname">firstByte</td><td>First byte in chainBytes that this function writes to </td></tr>
-    <tr><td class="paramname">chainBytes</td><td>Array of bytes to be shifted out </td></tr>
+    <tr><td class="paramname">chainSize</td><td>The number of bytes in the entire daisy chain of boards </td></tr>
+    <tr><td class="paramname">firstByte</td><td>The index of the first byte assigned to this board </td></tr>
+    <tr><td class="paramname">*chainBytes</td><td>The array of bytes that will be shifted out to the chain. </td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented from <a class="el" href="classshift_board.html#a5a120f7aeb958c8e8fd0ec87eecc5798">shiftBoard</a>.</p>
 
 </div>
 </div>
@@ -142,7 +146,7 @@ Public Member Functions</h2></td></tr>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:09 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

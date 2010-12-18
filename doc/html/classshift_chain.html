@@ -42,13 +42,13 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a195e5184202ba7408c5d4e5c9a568942">shiftChain</a> (uint8_t boardCount, shiftBoard **boards, uint8_t dataPin, uint8_t clockPin, uint8_t latchPin, uint8_t resetPin)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a195e5184202ba7408c5d4e5c9a568942">shiftChain</a> (uint8_t boardCount, <a class="el" href="classshift_board.html">shiftBoard</a> **boards, uint8_t dataPin, uint8_t clockPin, uint8_t latchPin, uint8_t resetPin)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new daisy chain object, without an index output.  <a href="#a195e5184202ba7408c5d4e5c9a568942"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a18e8f5846d6fcece74e38051ce953467">shiftChain</a> (uint8_t boardCount, shiftBoard **boards, uint8_t dataPin, uint8_t clockPin, uint8_t latchPin, uint8_t resetPin, uint8_t indexPin)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a18e8f5846d6fcece74e38051ce953467">shiftChain</a> (uint8_t boardCount, <a class="el" href="classshift_board.html">shiftBoard</a> **boards, uint8_t dataPin, uint8_t clockPin, uint8_t latchPin, uint8_t resetPin, uint8_t indexPin)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new daisy chain object, with an index output.  <a href="#a18e8f5846d6fcece74e38051ce953467"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a580a9110d442bcf5c251ad2618b7943d">getBoardCount</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of boards in the chain.  <a href="#a580a9110d442bcf5c251ad2618b7943d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">shiftBoard *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a625ee1a0a7dcf77c5895391a58667267">getBoard</a> (uint8_t index)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshift_board.html">shiftBoard</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a625ee1a0a7dcf77c5895391a58667267">getBoard</a> (uint8_t index)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to a particular board in the chain.  <a href="#a625ee1a0a7dcf77c5895391a58667267"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshift_chain.html#a563be48435fee78934e72ef67be030e1">startTimer</a> (uint8_t prescaler, uint8_t timerVal, uint8_t timer)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the timer.  <a href="#a563be48435fee78934e72ef67be030e1"></a><br/></td></tr>
@@ -59,6 +59,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Class to represent a daisy chain of boards. </p>
+<p>Each <a class="el" href="classshift_chain.html" title="Class to represent a daisy chain of boards.">shiftChain</a> object stores all of the data required to create and use a daisy chained group of shift register controlled modules, devices, or boards. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a195e5184202ba7408c5d4e5c9a568942"></a><!-- doxytag: member="shiftChain::shiftChain" ref="a195e5184202ba7408c5d4e5c9a568942" args="(uint8_t boardCount, shiftBoard **boards, uint8_t dataPin, uint8_t clockPin, uint8_t latchPin, uint8_t resetPin)" -->
 <div class="memitem">
@@ -73,7 +74,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">shiftBoard **&#160;</td>
+          <td class="paramtype"><a class="el" href="classshift_board.html">shiftBoard</a> **&#160;</td>
           <td class="paramname"> <em>boards</em>, </td>
         </tr>
         <tr>
@@ -112,12 +113,12 @@ Public Member Functions</h2></td></tr>
 <p>Create a new daisy chain object, without an index output. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">boardCount</td><td>The number of boards in the chain </td></tr>
-    <tr><td class="paramname">boards</td><td>Array of pointers to ShiftBoard objects </td></tr>
-    <tr><td class="paramname">dataPin</td><td>Arduino pin number to be used for the data line </td></tr>
-    <tr><td class="paramname">clockPin</td><td>Arduino pin number to be used for the clock line </td></tr>
-    <tr><td class="paramname">latchPin</td><td>Arduino pin number to be used for the latch line </td></tr>
-    <tr><td class="paramname">resetPin</td><td>Arduino pin number to be used for the master reset line </td></tr>
+    <tr><td class="paramname">boardCount</td><td>The number of boards attached to the chain </td></tr>
+    <tr><td class="paramname">**boards</td><td>An array of pointers to the board objects. Storage for the array and the board objects must be allocated before calling the constructor, such as by declaring them statically or globally. </td></tr>
+    <tr><td class="paramname">dataPin</td><td>The Arduino pin used to transmit data to the shift register(s). On the sixteen channel board, this is pin 13. </td></tr>
+    <tr><td class="paramname">clockPin</td><td>The Arduino pin used to clock the shift register(s). On the sixteen channel board, this is pin 12. </td></tr>
+    <tr><td class="paramname">latchPin</td><td>The Arduino pin used to latch the shifted data into the shift register output. On the sixteen channel board, this is pin 7. </td></tr>
+    <tr><td class="paramname">resetPin</td><td>The Arduino pin that drives the master reset for the shift register chain. On the sixteen channel board, this is pin 8. </td></tr>
   </table>
   </dd>
 </dl>
@@ -137,7 +138,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">shiftBoard **&#160;</td>
+          <td class="paramtype"><a class="el" href="classshift_board.html">shiftBoard</a> **&#160;</td>
           <td class="paramname"> <em>boards</em>, </td>
         </tr>
         <tr>
@@ -182,13 +183,13 @@ Public Member Functions</h2></td></tr>
 <p>Create a new daisy chain object, with an index output. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">boardCount</td><td>The number of boards in the chain </td></tr>
-    <tr><td class="paramname">boards</td><td>Array of pointers to ShiftBoard objects </td></tr>
-    <tr><td class="paramname">dataPin</td><td>Arduino pin number to be used for the data line </td></tr>
-    <tr><td class="paramname">clockPin</td><td>Arduino pin number to be used for the clock line </td></tr>
-    <tr><td class="paramname">latchPin</td><td>Arduino pin number to be used for the latch line </td></tr>
-    <tr><td class="paramname">resetPin</td><td>Arduino pin number to be used for the master reset line </td></tr>
-    <tr><td class="paramname">indexPin</td><td>Arduino pin number to be used for an index output </td></tr>
+    <tr><td class="paramname">boardCount</td><td>The number of boards attached to the chain </td></tr>
+    <tr><td class="paramname">**boards</td><td>An array of pointers to the board objects. Storage for the array and the board objects must be allocated before calling the constructor, such as by declaring them statically or globally. </td></tr>
+    <tr><td class="paramname">dataPin</td><td>The Arduino pin used to transmit data to the shift register(s). On the sixteen channel board, this is pin 13. </td></tr>
+    <tr><td class="paramname">clockPin</td><td>The Arduino pin used to clock the shift register(s). On the sixteen channel board, this is pin 12. </td></tr>
+    <tr><td class="paramname">latchPin</td><td>The Arduino pin used to latch the shifted data into the shift register output. On the sixteen channel board, this is pin 7. </td></tr>
+    <tr><td class="paramname">resetPin</td><td>The Arduino pin that drives the master reset for the shift register chain. On the sixteen channel board, this is pin 8. </td></tr>
+    <tr><td class="paramname">indexPin</td><td>This pin turns on while <a class="el" href="classshift_chain.html#ad6727d72887b7017f68ef6dc7948a7ed" title="Do a timer tick -- call this from an ISR.">shiftChain::doTick()</a> is running. This allows precise timing measurement. </td></tr>
   </table>
   </dd>
 </dl>
@@ -212,6 +213,12 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Do a timer tick -- call this from an ISR. </p>
+<p>This can be called from a loop, but you get the most consistent results from calling it from an ISR, such as follows: </p>
+<div class="fragment"><pre class="fragment">  ISR (TIMER2_OVF_vect)
+      {
+              myChain-&gt;doTick();
+      }
+</pre></div><p> Calling it in this fashion gives consistent speed from stepper motors and the like. </p>
 
 </div>
 </div>
@@ -220,7 +227,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">shiftBoard * shiftChain::getBoard </td>
+          <td class="memname"><a class="el" href="classshift_board.html">shiftBoard</a> * shiftChain::getBoard </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"> <em>index</em>&#160;)</td>
@@ -231,6 +238,13 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Get a pointer to a particular board in the chain. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The array index of the desired board object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the selected board object </dd></dl>
 
 </div>
 </div>
@@ -250,6 +264,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Get the number of boards in the chain. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The number of boards in this chain </dd></dl>
 
 </div>
 </div>
@@ -285,14 +300,24 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Start the timer. </p>
+<p>This starts the timer directed by the timer parameter with the given pre-scaler and reset value. It also activates the overflow interrupt for the given timer. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">prescaler</td><td>Select the timer pre-scaler. Defaults to 1024 </td></tr>
-    <tr><td class="paramname">timerVal</td><td>Select a value for the timer to reset to, for precise control of frequency </td></tr>
-    <tr><td class="paramname">timer</td><td>Select the timer to use; only Timer 2 works currently </td></tr>
+    <tr><td class="paramname">prescaler</td><td>Select the timer pre-scaler. This is the value that the main processor clock is divided by to clock the timer. define values are provide for all the supported pre-scaler values:</p>
+<ul>
+<li>__preScaler32__</li>
+<li>__preScaler64__</li>
+<li>__preScaler128__</li>
+<li>__preScaler256__</li>
+<li>__preScaler1024__ If an un-supported value is passed in here, the pre scaler defaults to 1024. </li>
+</ul>
+</td></tr>
+    <tr><td class="paramname">timerVal</td><td>This is the value that the timer resets to after each time it overflows. The number of ticks of the timer clock between overflows is equal to maxTimerValue - timerVal. Since only 8-bit timers are supported so far, this is an 8-bit value. </td></tr>
+    <tr><td class="paramname">timer</td><td>The timer to start. The only supported timer right now is 2; selecting any other timer will result in an error. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns a 0 if timer 2 is selected; otherwise -1. </dd></dl>
 
 </div>
 </div>
@@ -312,6 +337,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Shut down the current timer. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>This returns status. However, the error checking/status functionality is not implemented, so it always returns 0 (success). </dd></dl>
 
 </div>
 </div>
@@ -320,7 +346,7 @@ Public Member Functions</h2></td></tr>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:09 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

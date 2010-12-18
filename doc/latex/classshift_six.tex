@@ -4,24 +4,30 @@
 }
 
 
-Implementation of shiftBoard for a six channel high current Arduino shield.  
+Implementation of \hyperlink{classshift_board}{shiftBoard} for a six channel high current Arduino shield.  
 
 
 
 
 {\ttfamily \#include $<$ShiftStepper.h$>$}
 
+Inheritance diagram for shiftSix:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classshift_six}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classshift_six_a061ead17cbd393a561fa54146358c627}{shiftSix} (uint8\_\-t \hyperlink{_shift_stepper_8h_adf507bdc7510cde5b562b4838bcb2a9f}{devCount}, \hyperlink{classshift_device}{shiftDevice} $\ast$$\ast$\hyperlink{_shift_stepper_8h_ae69cffa41bbed7173c4796af281252ce}{devices})
-\begin{DoxyCompactList}\small\item\em Create a ShiftSix object. \item\end{DoxyCompactList}\item 
+\hyperlink{classshift_six_a061ead17cbd393a561fa54146358c627}{shiftSix} (uint8\_\-t \hyperlink{classshift_board_ae7bba07850ced1219dcf67cab33de929}{devCount}, \hyperlink{classshift_device}{shiftDevice} $\ast$$\ast$\hyperlink{classshift_board_a07a2549714f7064fa5e48ec63fdb5efb}{devices})
+\begin{DoxyCompactList}\small\item\em Create a new \hyperlink{classshift_six}{shiftSix} board object. \item\end{DoxyCompactList}\item 
 void \hyperlink{classshift_six_aa69539cff7e19873a7d37e640632e966}{doBoardTick} (uint8\_\-t chainSize, uint8\_\-t firstByte, uint8\_\-t $\ast$chainBytes)
-\begin{DoxyCompactList}\small\item\em Do a timer tick for a sixteen channel board. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Do a timer tick for a six channel board. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Implementation of shiftBoard for a six channel high current Arduino shield. 
+Implementation of \hyperlink{classshift_board}{shiftBoard} for a six channel high current Arduino shield. 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classshift_six_a061ead17cbd393a561fa54146358c627}{
@@ -36,13 +42,13 @@ Implementation of shiftBoard for a six channel high current Arduino shield.
 \label{classshift_six_a061ead17cbd393a561fa54146358c627}
 
 
-Create a ShiftSix object. 
+Create a new \hyperlink{classshift_six}{shiftSix} board object. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em devCount} & Number of devices \\
+{\em devCount} & The number of individual devices attached to this board. \\
 \hline
-{\em devices} & Array of pointers to device objects \\
+{\em $\ast$$\ast$devices} & An array of pointers to the device objects. This array and the objects it contains must be allocated either statically or at global scope. \\
 \hline
 \end{DoxyParams}
 
@@ -57,21 +63,25 @@ Create a ShiftSix object.
 \item[{uint8\_\-t}]{ firstByte, }
 \item[{uint8\_\-t $\ast$}]{ chainBytes}
 \end{DoxyParamCaption}
-)}}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{classshift_six_aa69539cff7e19873a7d37e640632e966}
 
 
-Do a timer tick for a sixteen channel board. 
+Do a timer tick for a six channel board. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em chainSize} & Total number of bytes in the chain \\
+{\em chainSize} & The number of bytes in the entire daisy chain of boards \\
 \hline
-{\em firstByte} & First byte in chainBytes that this function writes to \\
+{\em firstByte} & The index of the first byte assigned to this board \\
 \hline
-{\em chainBytes} & Array of bytes to be shifted out \\
+{\em $\ast$chainBytes} & The array of bytes that will be shifted out to the chain. \\
 \hline
 \end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classshift_board_a5a120f7aeb958c8e8fd0ec87eecc5798}{shiftBoard}.
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

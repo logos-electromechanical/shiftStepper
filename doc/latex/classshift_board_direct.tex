@@ -1,0 +1,146 @@
+\hypertarget{classshift_board_direct}{
+\section{shiftBoardDirect Class Reference}
+\label{classshift_board_direct}\index{shiftBoardDirect@{shiftBoardDirect}}
+}
+
+
+Abstract base class for individual boards, without \hyperlink{classshift_device}{shiftDevice} objects.  
+
+
+
+
+{\ttfamily \#include $<$ShiftStepper.h$>$}
+
+Inheritance diagram for shiftBoardDirect:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classshift_board_direct}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classshift_board_direct_a96cf7c0cd6c4d138d9458eeee30ec89d}{doBoardTick} (uint8\_\-t chainSize, uint8\_\-t firstByte, uint8\_\-t $\ast$chainBytes)
+\begin{DoxyCompactList}\small\item\em Handle for per timer tick behavior of each board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_direct_a3138cbbc274b4bccb55e65b7be75ca67}{getBoardSize} (void)
+\begin{DoxyCompactList}\small\item\em Get the size of the board's datastream, in bytes. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_direct_a2b309e68e183ea2e598751b6e7ef2b5d}{setBoardOutput} (uint8\_\-t $\ast$\hyperlink{classshift_board_direct_ab71f1de9ff5b1324445099f001ce7231}{bytes})
+\begin{DoxyCompactList}\small\item\em Set the board's output. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\_\-t \hyperlink{classshift_board_direct_abc23adad3ba60c3e26e69945aaa98012}{byteCount}
+\begin{DoxyCompactList}\small\item\em Number of bytes of shift register on the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_direct_a16ef946d7cef5a67b726eeba6f4b020a}{firstChan}
+\begin{DoxyCompactList}\small\item\em First active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{classshift_board_direct_a99e0f303fee22d079b677b253369c440}{lastChan}
+\begin{DoxyCompactList}\small\item\em Last active channel/byte/bit on the board. \item\end{DoxyCompactList}\item 
+uint8\_\-t $\ast$ \hyperlink{classshift_board_direct_ab71f1de9ff5b1324445099f001ce7231}{bytes}
+\begin{DoxyCompactList}\small\item\em Array of bytes in the board. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for individual boards, without \hyperlink{classshift_device}{shiftDevice} objects. This base class differs from \hyperlink{classshift_board}{shiftBoard} in that it is designed to enable the user to write directly to the bits shifted to the board, without the intervention of any devices. This will be faster in applications that do not require the bookkeeping of stepper applications or similar. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classshift_board_direct_a96cf7c0cd6c4d138d9458eeee30ec89d}{
+\index{shiftBoardDirect@{shiftBoardDirect}!doBoardTick@{doBoardTick}}
+\index{doBoardTick@{doBoardTick}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{doBoardTick}]{\setlength{\rightskip}{0pt plus 5cm}virtual void shiftBoardDirect::doBoardTick (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ chainSize, }
+\item[{uint8\_\-t}]{ firstByte, }
+\item[{uint8\_\-t $\ast$}]{ chainBytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classshift_board_direct_a96cf7c0cd6c4d138d9458eeee30ec89d}
+
+
+Handle for per timer tick behavior of each board. 
+
+
+
+Reimplemented in \hyperlink{classshift_sixteen_direct_a5b21bfddb73f49eb6743b335db18b066}{shiftSixteenDirect}, and \hyperlink{classshift_six_direct_a1d0d1896184b4dda12754fd33b902dd8}{shiftSixDirect}.
+
+\hypertarget{classshift_board_direct_a3138cbbc274b4bccb55e65b7be75ca67}{
+\index{shiftBoardDirect@{shiftBoardDirect}!getBoardSize@{getBoardSize}}
+\index{getBoardSize@{getBoardSize}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{getBoardSize}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoardDirect::getBoardSize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_board_direct_a3138cbbc274b4bccb55e65b7be75ca67}
+
+
+Get the size of the board's datastream, in bytes. 
+
+\begin{DoxyReturn}{Returns}
+The number of bytes of shift register on this board 
+\end{DoxyReturn}
+\hypertarget{classshift_board_direct_a2b309e68e183ea2e598751b6e7ef2b5d}{
+\index{shiftBoardDirect@{shiftBoardDirect}!setBoardOutput@{setBoardOutput}}
+\index{setBoardOutput@{setBoardOutput}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{setBoardOutput}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t shiftBoardDirect::setBoardOutput (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t $\ast$}]{ bytes}
+\end{DoxyParamCaption}
+)}}
+\label{classshift_board_direct_a2b309e68e183ea2e598751b6e7ef2b5d}
+
+
+Set the board's output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & An array of bytes representing the desired output state of the board. Must have at least as many members as specified by the output of \hyperlink{classshift_board_direct_a3138cbbc274b4bccb55e65b7be75ca67}{shiftBoardDirect::getBoardSize()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Exit status. Always returns 0 (success) now 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classshift_board_direct_abc23adad3ba60c3e26e69945aaa98012}{
+\index{shiftBoardDirect@{shiftBoardDirect}!byteCount@{byteCount}}
+\index{byteCount@{byteCount}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{byteCount}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoardDirect::byteCount}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_direct_abc23adad3ba60c3e26e69945aaa98012}
+
+
+Number of bytes of shift register on the board. 
+
+\hypertarget{classshift_board_direct_ab71f1de9ff5b1324445099f001ce7231}{
+\index{shiftBoardDirect@{shiftBoardDirect}!bytes@{bytes}}
+\index{bytes@{bytes}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t$\ast$ {\bf shiftBoardDirect::bytes}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_direct_ab71f1de9ff5b1324445099f001ce7231}
+
+
+Array of bytes in the board. 
+
+\hypertarget{classshift_board_direct_a16ef946d7cef5a67b726eeba6f4b020a}{
+\index{shiftBoardDirect@{shiftBoardDirect}!firstChan@{firstChan}}
+\index{firstChan@{firstChan}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{firstChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoardDirect::firstChan}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_direct_a16ef946d7cef5a67b726eeba6f4b020a}
+
+
+First active channel/byte/bit on the board. 
+
+\hypertarget{classshift_board_direct_a99e0f303fee22d079b677b253369c440}{
+\index{shiftBoardDirect@{shiftBoardDirect}!lastChan@{lastChan}}
+\index{lastChan@{lastChan}!shiftBoardDirect@{shiftBoardDirect}}
+\subsubsection[{lastChan}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t {\bf shiftBoardDirect::lastChan}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classshift_board_direct_a99e0f303fee22d079b677b253369c440}
+
+
+Last active channel/byte/bit on the board. 
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8h}{ShiftStepper.h}\item 
+C:/Users/Pierce/Desktop/arduino-\/0018/libraries/shiftStepper/\hyperlink{_shift_stepper_8cpp}{ShiftStepper.cpp}\end{DoxyCompactItemize}

@@ -34,7 +34,7 @@
 </div>
 <div class="contents">
 <!-- doxytag: class="shiftBoard" -->
-<p>Abstract base class for individual boards.  
+<p>Abstract base class for individual boards with <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a>.  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_shift_stepper_8h_source.html">ShiftStepper.h</a>&gt;</code></p>
@@ -44,7 +44,8 @@ Inheritance diagram for shiftBoard:<!-- endSectionHeader --></div>
  <div class="center">
   <img src="classshift_board.png" usemap="#shiftBoard_map" alt=""/>
   <map id="shiftBoard_map" name="shiftBoard_map">
-<area href="classshift_sixteen.html" alt="shiftSixteen" shape="rect" coords="0,56,76,80"/>
+<area href="classshift_six.html" alt="shiftSix" shape="rect" coords="0,56,76,80"/>
+<area href="classshift_sixteen.html" alt="shiftSixteen" shape="rect" coords="86,56,162,80"/>
 </map>
  </div><!-- endSectionContent --></div>
 
@@ -74,7 +75,8 @@ Protected Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries in the device array.  <a href="#ae7bba07850ced1219dcf67cab33de929"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Abstract base class for individual boards. </p>
+<p>Abstract base class for individual boards with <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a>. </p>
+<p>This base class covers boards which contain one or more <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a> objects. </p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5a120f7aeb958c8e8fd0ec87eecc5798"></a><!-- doxytag: member="shiftBoard::doBoardTick" ref="a5a120f7aeb958c8e8fd0ec87eecc5798" args="(uint8_t chainSize, uint8_t firstByte, uint8_t *chainBytes)" -->
 <div class="memitem">
@@ -109,7 +111,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Handle for per timer tick behavior of each board. </p>
 
-<p>Reimplemented in <a class="el" href="classshift_sixteen.html#a28c2a73078d10abf6f779021fd8d2908">shiftSixteen</a>.</p>
+<p>Reimplemented in <a class="el" href="classshift_sixteen.html#a28c2a73078d10abf6f779021fd8d2908">shiftSixteen</a>, and <a class="el" href="classshift_six.html#aa69539cff7e19873a7d37e640632e966">shiftSix</a>.</p>
 
 </div>
 </div>
@@ -261,7 +263,7 @@ Protected Attributes</h2></td></tr>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Dec 7 2010 23:08:19 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:09 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

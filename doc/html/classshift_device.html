@@ -68,6 +68,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Abstract base class for creating devices such as motors that attach to a board. </p>
+<p>A <a class="el" href="classshift_device.html" title="Abstract base class for creating devices such as motors that attach to a board.">shiftDevice</a> object represents an object controlled by a shift register board. </p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab67731aedf33aad1b8c6dcbdbd01ecff"></a><!-- doxytag: member="shiftDevice::doDevTick" ref="ab67731aedf33aad1b8c6dcbdbd01ecff" args="(uint8_t bytesPerBoard, uint8_t *boardBytes)" -->
 <div class="memitem">
@@ -95,7 +96,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Handle for the per timer tick behavior of each device. </p>
-<p>This function is intended to be called from shiftBoard::doBoardTick(), which passes it the array of bytes that it expects it to write the data to be shifted out to. </p>
+<p>This function is intended to be called from <a class="el" href="classshift_board.html#a5a120f7aeb958c8e8fd0ec87eecc5798" title="Handle for per timer tick behavior of each board.">shiftBoard::doBoardTick()</a>, which passes it the array of bytes that it expects it to write the data to be shifted out to. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">bytesPerBoard</td><td>is the number of outgoing bytes for the board this device is part of. </td></tr>
@@ -185,7 +186,7 @@ Protected Attributes</h2></td></tr>
 <li>C:/Users/Pierce/Desktop/arduino-0018/libraries/shiftStepper/<a class="el" href="_shift_stepper_8cpp.html">ShiftStepper.cpp</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Dec 9 2010 20:57:05 for Shift Stepper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Dec 17 2010 20:31:09 for Shift Stepper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>
