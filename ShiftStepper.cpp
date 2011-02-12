@@ -714,7 +714,7 @@ shiftSixteenDirect::shiftSixteenDirect (void)
   \param *chainBytes The array of bytes that will be shifted out to the chain.
  */
 
-void shiftSixteen::doBoardTick(uint8_t chainSize, 
+void shiftSixteenDirect::doBoardTick(uint8_t chainSize, 
 	uint8_t firstByte, 
 	uint8_t *chainBytes)
 {
@@ -760,7 +760,7 @@ shiftSixDirect::shiftSixDirect (void)
   \param *chainBytes The array of bytes that will be shifted out to the chain.
  */
 
-void shiftSixteen::doBoardTick(uint8_t chainSize, 
+void shiftSixDirect::doBoardTick(uint8_t chainSize, 
 	uint8_t firstByte, 
 	uint8_t *chainBytes)
 {
