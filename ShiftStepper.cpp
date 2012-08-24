@@ -1163,23 +1163,30 @@ void shiftChain::doTick (void)
 	
 }
 
-/*!
-  This is some strange linker food required to make it all work.
-  
-  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
- */
-int __cxa_guard_acquire(__guard *g) {return !*(char *)(g);}; 
+
+#if ARDUINO < 100
+
+// Define some for the linker in older versions of arduino.
 
 /*!
   This is some strange linker food required to make it all work.
   
   See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
  */
-void __cxa_guard_release (__guard *g) {*(char *)g = 1;}; 
+ int __cxa_guard_acquire(__guard *g) {return !*(char *)(g);}; 
 
 /*!
   This is some strange linker food required to make it all work.
   
   See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
  */
-void __cxa_guard_abort (__guard *) {}; 
+ void __cxa_guard_release (__guard *g) {*(char *)g = 1;}; 
+
+/*!
+  This is some strange linker food required to make it all work.
+  
+  See http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=410870
+ */
+ void __cxa_guard_abort (__guard *) {}; 
+
+#endif
