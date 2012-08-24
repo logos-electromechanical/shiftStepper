@@ -121,12 +121,17 @@
 #include <avr/io.h>
 #include <inttypes.h>
 #include <avr/interrupt.h>
-#include "WProgram.h"
-#include "wiring.h"
-#include "wiring_private.h"
-#include "pins_arduino.h"
-#include "HardwareSerial.h"
 
+#if ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+  #include "wiring.h"
+  #include "wiring_private.h"
+  #include "pins_arduino.h"
+#endif
+
+#include "HardwareSerial.h"
 #include "ShiftStepper.h"
 
 
