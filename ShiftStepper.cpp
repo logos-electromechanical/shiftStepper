@@ -127,7 +127,7 @@
 #include "pins_arduino.h"
 #include "HardwareSerial.h"
 
-#include "shiftStepper.h"
+#include "ShiftStepper.h"
 
 
 /////////////////
